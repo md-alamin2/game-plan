@@ -6,17 +6,21 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import axios from "axios";
 
 const Slider = () => {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading;
-    fetch("/slider.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setSlides(data);
+    axios
+      .get("/slider.json")
+      .then((res) => {
+        setSlides(res.data);
         setLoading(false);
+      })
+      .catch((error) => {
+        alert("Error fetching slider data:", error);
       });
   }, []);
 
@@ -39,27 +43,29 @@ const Slider = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               <div className="hero-overlay">
-              <div className=" flex flex-col justify-center h-full px-8 md:px-16 lg:px-24 text-white">
-                <div className="max-w-3xl space-y-6">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                    {slide.title}
-                  </h2>
-                  <p className="text-xl md:text-2xl font-semibold text-primary">
-                    {slide.tagline}
-                  </p>
-                  <p className="text-lg md:text-xl">{slide.description}</p>
-                  <div className="flex flex-wrap gap-4 mt-8">
-                    <Link to="/courts">
-                      <button className="btn btn-primary flex items-center">
-                        <FaCalendarAlt /> Book Court <FaArrowRight />
-                      </button>
-                    </Link>
-                    <Link>
-                      <button className="btn btn-secondary"><FaInfoCircle/> Learn More <FaArrowRight /></button>
-                    </Link>
+                <div className=" flex flex-col justify-center h-full px-8 md:px-16 lg:px-24 text-white">
+                  <div className="max-w-3xl space-y-6">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                      {slide.title}
+                    </h2>
+                    <p className="text-xl md:text-2xl font-semibold text-primary">
+                      {slide.tagline}
+                    </p>
+                    <p className="text-lg md:text-xl">{slide.description}</p>
+                    <div className="flex flex-wrap gap-4 mt-8">
+                      <Link to="/courts">
+                        <button className="btn btn-primary flex items-center">
+                          <FaCalendarAlt /> Book Court <FaArrowRight />
+                        </button>
+                      </Link>
+                      <Link>
+                        <button className="btn btn-secondary">
+                          <FaInfoCircle /> Learn More <FaArrowRight />
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
             </div>
           </SwiperSlide>
