@@ -1,0 +1,34 @@
+[
+    {
+      "id": 1,
+      "icon": "https://i.ibb.co/TMXjK6d5/icons8-trophy-96.png",
+      "count": 15,
+      "suffix": "+",
+      "title": "Premium Courts",
+      "description": "World-class facilities"
+    },
+    {
+      "id": 2,
+      "icon": "https://i.ibb.co/0LG3nVW/icons8-user-account-97.png",
+      "count": 2000,
+      "suffix": "+",
+      "title": "Active Members",
+      "description": "Join our community"
+    },
+    {
+      "id": 3,
+      "icon": "https://i.ibb.co/nsw2CQ9N/icons8-calendar-99.png",
+      "count": 10,
+      "suffix": " ",
+      "title": "Years Excellence",
+      "description": "Trusted since 2013"
+    },
+    {
+      "id": 4,
+      "icon": "https://i.ibb.co/GftpWsTH/icons8-star-98.png",
+      "count": 4.9,
+      "suffix": "",
+      "title": "Member Rating",
+      "description": "Rated by members"
+    }
+  ]
