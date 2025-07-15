@@ -3,6 +3,7 @@ import Slider from "./Slider";
 import StatsSection from "./StatsSection";
 import About from "./About";
 import Location from "./Location";
+import ExclusiveOffers from "./ExclusiveOffers";
 
 const Home = () => {
   return <div>
@@ -10,6 +11,7 @@ const Home = () => {
     <StatsSection></StatsSection>
     <About></About>
     <Location></Location>
+    <ExclusiveOffers></ExclusiveOffers>
   </div>;
 };
 
