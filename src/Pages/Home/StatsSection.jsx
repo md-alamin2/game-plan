@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Sheared/Loading";
 
 const StatsSection = () => {
   const [stats, setStats] = useState([]);
@@ -21,6 +22,10 @@ const StatsSection = () => {
       });
   }, []);
 
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div className="py-8 bg-base-200">
       <div className="w-11/12 lg:container mx-auto px-4">
@@ -37,7 +42,7 @@ const StatsSection = () => {
                     duration={2.5}
                     decimals={stat.id === 4 ? 1 : 0}
                     className="text-4xl font-bold"
-                    scrollSpyOnce={true}
+                    enableScrollSpy={true}
                   />
                   {stat.suffix && (
                     <span className="text-4xl font-bold">{stat.suffix}</span>

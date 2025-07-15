@@ -1,8 +1,37 @@
-import { FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaMapMarkerAlt,
+  FaPhone,
+} from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import Logo from "../Logo/Logo";
+import { NavLink } from "react-router";
 
 const Footer = () => {
+    const active = "font-semibold text-white";
+    const links = (
+    <>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? active : "font-medium")}
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/courts"
+          className={({ isActive }) => (isActive ? active : "font-medium")}
+        >
+          Courts
+        </NavLink>
+      </li>
+    </>
+  );
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="container mx-auto">
@@ -20,26 +49,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">Quick Links</h2>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Courts
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Contact
-                </a>
-              </li>
+              {links}
             </ul>
           </div>
 
@@ -49,14 +59,19 @@ const Footer = () => {
               <h2 className="text-xl font-semibold mb-2">Contact Info</h2>
               <address className="not-italic space-y-1">
                 <div className="flex items-center gap-2">
-                    <FaMapMarkerAlt className="text-primary"/>
+                  <FaMapMarkerAlt className="text-primary" />
                   <div>
                     <p>123 Sports Avenue</p>
-                    <p>Elite District, ED 12345</p>
+                    <p>Savar, Dahaka, Bangaldesh</p>
                   </div>
                 </div>
-                <p className="flex items-center gap-2"><FaPhone className="text-primary"/> +1 (555) 123-4567</p>
-                <p className="flex items-center gap-2"><MdOutlineEmail className="text-primary"/> info@elitesportsclub.com</p>
+                <p className="flex items-center gap-2">
+                  <FaPhone className="text-primary" /> +1 (555) 123-4567
+                </p>
+                <p className="flex items-center gap-2">
+                  <MdOutlineEmail className="text-primary" />{" "}
+                  info@elitesportsclub.com
+                </p>
               </address>
             </div>
           </div>
@@ -67,25 +82,22 @@ const Footer = () => {
               <h2 className="text-xl font-semibold mb-2">Follow Us</h2>
               <div className="flex space-x-4">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/programmingHero"
+                  target="_blank"
                   className="text-2xl hover:text-primary transition-colors"
                 >
                   <FaFacebook />
                 </a>
                 <a
-                  href="#"
-                  className="text-2xl hover:text-primary transition-colors"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href="#"
+                  href="https://www.instagram.com/programminghero/"
+                  target="_blank"
                   className="text-2xl hover:text-primary transition-colors"
                 >
                   <FaInstagram />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.youtube.com/@ProgrammingHeroCommunity"
+                  target="_blank"
                   className="text-2xl hover:text-primary transition-colors"
                 >
                   <FaYoutube />

@@ -1,6 +1,7 @@
 import ExclusiveOfferCard from "../../Components/Sheared/ExclusiveOfferCard";
 
 const ExclusiveOffers = () => {
+  // todo: fetch offers from API
   const offers = [
     {
       id: 1,
@@ -33,7 +34,9 @@ const ExclusiveOffers = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-primary mb-2">Exclusive Offers</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            Exclusive Offers
+          </h1>
           <p className="text-xl text-gray-600">
             Save more with our special promotion codes
           </p>
@@ -42,7 +45,10 @@ const ExclusiveOffers = () => {
         {/* Offers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {offers.map((offer) => (
-            <ExclusiveOfferCard key={offer.id} offer={offer}></ExclusiveOfferCard>
+            <ExclusiveOfferCard
+              key={offer.id}
+              offer={offer}
+            ></ExclusiveOfferCard>
           ))}
         </div>
       </div>

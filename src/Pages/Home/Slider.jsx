@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import axios from "axios";
+import Loading from "../../Components/Sheared/Loading";
 
 const Slider = () => {
   const [slides, setSlides] = useState([]);
@@ -23,6 +24,10 @@ const Slider = () => {
         alert("Error fetching slider data:", error);
       });
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="relative h-[80vh]">
