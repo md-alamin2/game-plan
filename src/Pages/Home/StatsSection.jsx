@@ -23,7 +23,7 @@ const StatsSection = () => {
 
   return (
     <div className="py-8 bg-base-200">
-      <div className="container mx-auto px-4">
+      <div className="w-11/12 lg:container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat) => (
             <div key={stat.id} className="card">

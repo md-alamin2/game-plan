@@ -3,7 +3,7 @@ import img from "../../assets/about-img.jpg";
 
 const About = () => {
   return (
-    <div className="py-16 bg-base-100">
+    <div className="mt-20 bg-base-100">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header Section */}
         <div className="text-center mb-16">
