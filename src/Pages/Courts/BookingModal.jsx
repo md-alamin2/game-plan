@@ -1,9 +1,16 @@
-import { useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import useAuth from "../../Hooks/useAuth";
+import PrivateRoutes from "../../Routes/PrivateRoute";
+import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const BookingModal = ({ court, isOpen, closeModal }) => {
-  const [selectedDate, setSelectedDate] = useState('');
+  const { user } = useAuth();
+  const axiosInstance = useAxios();
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlots, setSelectedSlots] = useState([]);
 
   // Calculate total cost
@@ -11,9 +18,44 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
 
   const toggleSlot = (slot) => {
     if (selectedSlots.includes(slot)) {
-      setSelectedSlots(selectedSlots.filter(s => s !== slot));
+      setSelectedSlots(selectedSlots.filter((s) => s !== slot));
     } else {
       setSelectedSlots([...selectedSlots, slot]);
+    }
+  };
+
+  const HandleBookingSlot = async () => {
+    // Handle booking submission
+    const bookingData = {
+      courtId: court._id,
+      courtName: court.name,
+      courtType: court.sportType,
+      user: user?.email,
+      bookingDate: new Date(selectedDate),
+      slots: selectedSlots,
+      totalCost,
+    };
+    const res = await axiosInstance.post("bookings", bookingData);
+    if (res.data.insertedId) {
+      Swal.fire({
+        title: "Request submitted successfully!",
+        text: "Your booking request will be reviewed by the admin. Please wait for confirmation.",
+        icon: "success",
+      });
+      closeModal();
+      setSelectedDate("");
+      setSelectedSlots([]);
+    } else {
+      toast.error(`Something went wrong`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -53,17 +95,28 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                 <div className="mt-4 space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Court Type</label>
-                      <div className="mt-1 p-2 border rounded">{court.sportType}</div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Court Type
+                      </label>
+                      <div className="mt-1 p-2 border rounded">
+                        {court.sportType}
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Price per Hour</label>
-                      <div className="mt-1 p-2 border rounded">${court.price}</div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Price per Hour
+                      </label>
+                      <div className="mt-1 p-2 border rounded">
+                        ${court.price}
+                      </div>
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="date"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Date
                     </label>
                     <input
@@ -88,11 +141,11 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                           onClick={() => toggleSlot(slot.time)}
                           className={`btn text-sm ${
                             selectedSlots.includes(slot.time)
-                              ? 'btn-primary text-white'
-                              : ' text-gray-800 hover:bg-gray-200'
+                              ? "btn-primary text-white"
+                              : " text-gray-800 hover:bg-gray-200"
                           }`}
                         >
-                          {slot.time} {slot.available ? '' : '(Unavailable)'}
+                          {slot.time} {slot.available ? "" : "(Unavailable)"}
                         </button>
                       ))}
                     </div>
@@ -100,7 +153,8 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
 
                   <div className="pt-2">
                     <p className="text-lg font-medium">
-                      Total Cost: <span className="font-bold">${totalCost}</span>
+                      Total Cost:{" "}
+                      <span className="font-bold">${totalCost}</span>
                     </p>
                     <p className="text-sm text-gray-500">
                       Select multiple slots to calculate total
@@ -116,24 +170,16 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                   >
                     Cancel
                   </button>
-                  <button
-                    type="button"
-                    className="btn btn-primary text-sm font-medium text-white focus:outline-none focus-visible:ring-2 cursor-pointer "
-                    onClick={() => {
-                      // Handle booking submission
-                      console.log({
-                        courtId: court._id,
-                        date: new Date(selectedDate).toISOString(),
-                        slots: selectedSlots,
-                        totalCost
-                      });
-                      closeModal();
-                    }}
-                    
-                    disabled={!selectedDate || selectedSlots.length === 0}
-                  >
-                    Submit Request
-                  </button>
+                  <PrivateRoutes>
+                    <button
+                      type="button"
+                      className="btn btn-primary text-sm font-medium text-white focus:outline-none focus-visible:ring-2 cursor-pointer"
+                      onClick={HandleBookingSlot}
+                      disabled={!selectedDate || selectedSlots.length === 0}
+                    >
+                      Submit Request
+                    </button>
+                  </PrivateRoutes>
                 </div>
 
                 <p className="mt-4 text-sm text-gray-500">
@@ -147,6 +193,5 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
     </Transition>
   );
 };
-
 
 export default BookingModal;
