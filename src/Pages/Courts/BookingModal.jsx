@@ -6,10 +6,12 @@ import PrivateRoutes from "../../Routes/PrivateRoute";
 import useAxios from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const BookingModal = ({ court, isOpen, closeModal }) => {
   const { user } = useAuth();
   const axiosInstance = useAxios();
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlots, setSelectedSlots] = useState([]);
 
@@ -34,6 +36,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
       bookingDate: new Date(selectedDate),
       slots: selectedSlots,
       totalCost,
+      status: "pending",
     };
     const res = await axiosInstance.post("bookings", bookingData);
     if (res.data.insertedId) {
@@ -43,6 +46,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
         icon: "success",
       });
       closeModal();
+      navigate("/dashboard/pending-bookings");
       setSelectedDate("");
       setSelectedSlots([]);
     } else {

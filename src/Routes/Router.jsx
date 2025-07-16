@@ -7,6 +7,7 @@ import Courts from "../Pages/Courts/Courts";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import MyProfile from "../Pages/Dashboard/MyProfile";
 import PrivateRoutes from "./PrivateRoute";
+import PendingBookings from "../Pages/Dashboard/PendingBooking";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
         {
             index: true,
             element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
+        },
+        {
+            path:"/dashboard/pending-bookings",
+            element: <PrivateRoutes><PendingBookings></PendingBookings></PrivateRoutes>
         }
     ],
   },

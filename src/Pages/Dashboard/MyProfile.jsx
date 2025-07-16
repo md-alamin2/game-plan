@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
+import { Link } from "react-router";
 
 const MyProfile = () => {
   const { user, logoutUser, updateUser, setLoading } = useAuth();
@@ -322,10 +323,12 @@ const MyProfile = () => {
 
                 {/* Actions */}
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <button className="btn btn-outline">
-                    <FaHistory className="mr-2" />
-                    Booking History
-                  </button>
+                  <Link to="/dashboard/pending-bookings">
+                    <button className="btn btn-outline">
+                      <FaHistory className="mr-2" />
+                      Pending Bookings
+                    </button>
+                  </Link>
                   <button onClick={handleLogout} className="btn btn-error">
                     <FaSignOutAlt className="mr-2" />
                     Logout
