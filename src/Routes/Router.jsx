@@ -4,28 +4,41 @@ import RootLayout from "../Layouts/RootLayout/RootLayout";
 import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import Courts from "../Pages/Courts/Courts";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import MyProfile from "../Pages/Dashboard/MyProfile";
+import PrivateRoutes from "./PrivateRoute";
 
 export const router = createBrowserRouter([
-    {
-        path:"/",
-        Component: RootLayout,
-        children: [
-            {
-                index: true,
-                Component: Home,
-            },
-            {
-                path:"/courts",
-                Component: Courts
-            },
-            {
-                path:"/login",
-                Component: Login
-            },
-            {
-                path:"/register",
-                Component: Register,
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/courts",
+        Component: Courts,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+    children: [
+        {
+            index: true,
+            element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
+        }
+    ],
+  },
+]);

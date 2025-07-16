@@ -95,53 +95,50 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link to="/">
-            <Logo></Logo>
-          </Link>
+          <Logo></Logo>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-
-        {user ? (
-          <div className="flex items-center gap-2">
-            <div className="dropdown dropdown-hover dropdown-end lg:dropdown-start">
-              <img
-                tabIndex={0}
-                className="w-14 bg-primary p-1 rounded-full cursor-pointer"
-                src={`${user.photoURL}`}
-                alt="user"
-              />
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-              >
-                <li>
-                  <p>{user.displayName}</p>
-                </li>
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
-                <li>
-                  <button
-                    className="text-red-500 flex items-center"
-                    onClick={handleLogout}
-                  >
-                    Logout <MdOutlineLogout size={20} />
-                  </button>
-                </li>
-              </ul>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <div className="dropdown dropdown-hover dropdown-end lg:dropdown-start">
+                <img
+                  tabIndex={0}
+                  className="w-14 bg-primary p-1 rounded-full cursor-pointer"
+                  src={`${user.photoURL}`}
+                  alt="user"
+                />
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
+                  <li>
+                    <p>{user.displayName}</p>
+                  </li>
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button
+                      className="text-red-500 flex items-center"
+                      onClick={handleLogout}
+                    >
+                      Logout <MdOutlineLogout size={20} />
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="flex gap-2">
-            <Link to="/login" className="btn btn-primary text-black">
-              Login
-            </Link>
-          </div>
-        )}
-      </div>
+          ) : (
+            <div className="flex gap-2">
+              <Link to="/login" className="btn btn-primary text-black">
+                Login
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
