@@ -1,26 +1,23 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import useAxios from "../../Hooks/useAxios";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const PendingBookings = () => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   // Fetch ONLY the logged-in user's pending bookings
   const {
-    data: pendingBookings=[],
+    data: pendingBookings = [],
     isLoading,
     isError,
   } = useQuery({
     queryKey: ["pendingBookings", user?.email],
     queryFn: async () => {
-      const { data } = await axiosInstance.get(
-        `bookings/pending?user=${user?.email}`,
-        // {
-        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        // }
+      const { data } = await axiosSecure.get(
+        `bookings/pending?user=${user?.email}`
       );
       return data;
     },
@@ -30,15 +27,7 @@ const PendingBookings = () => {
   // Cancel booking mutation
   const { mutate: cancelBooking } = useMutation({
     mutationFn: async (bookingId) => {
-        console.log(bookingId);
-      await axiosInstance.delete(`cancel-bookings/${bookingId}`, 
-    //     {
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //       "User-Email": user?.email, // Additional security check
-    //     },
-    //   }
-    );
+      await axiosSecure.delete(`cancel-bookings/${bookingId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["pendingBookings", user?.email]);
@@ -60,37 +49,33 @@ const PendingBookings = () => {
       {pendingBookings?.length === 0 ? (
         <p>You have no pending bookings</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="table table-zebra w-full">
+        <div className="overflow-x-auto rounded-box border border-base-content/5">
+          <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
               <tr className="bg-gray-100">
-                <th className="py-2 px-4 border-b">Court</th>
-                <th className="py-2 px-4 border-b">Type</th>
-                <th className="py-2 px-4 border-b">Date</th>
-                <th className="py-2 px-4 border-b">Slots</th>
-                <th className="py-2 px-4 border-b">Price</th>
-                <th className="py-2 px-4 border-b">Actions</th>
+                <th></th>
+                <th>Court</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Slots</th>
+                <th>Price</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {pendingBookings?.map((booking) => (
+              {pendingBookings?.map((booking, index) => (
                 <tr key={booking._id} className="hover:bg-gray-50">
-                  <td className="py-2 px-4 border-b">
-                    {booking.courtName}
-                  </td>
-                  <td className="py-2 px-4 border-b ">
-                    {booking.courtType}
-                  </td>
-                  <td className="py-2 px-4 border-b ">
+                  <td>{index+1}</td>
+                  <td className="py-2 px-4">{booking.courtName}</td>
+                  <td className="py-2 px-4 ">{booking.courtType}</td>
+                  <td className="py-2 px-4 ">
                     {new Date(booking.bookingDate).toLocaleDateString()}
                   </td>
-                  <td className="py-2 px-4 border-b ">
+                  <td className="py-2 px-4 ">
                     {booking.slots.join(", ")}
                   </td>
-                  <td className="py-2 px-4 border-b ">
-                    ${booking.totalCost}
-                  </td>
-                  <td className="py-2 px-4 border-b ">
+                  <td className="py-2 px-4 ">${booking.totalCost}</td>
+                  <td className="py-2 px-4 ">
                     <button
                       onClick={() => cancelBooking(booking._id)}
                       className="btn btn-error"
