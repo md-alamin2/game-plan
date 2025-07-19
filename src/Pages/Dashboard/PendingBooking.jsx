@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Loading from "../../Components/Sheared/Loading";
 
 const PendingBookings = () => {
   const queryClient = useQueryClient();
@@ -39,7 +40,7 @@ const PendingBookings = () => {
   });
 
   if (!user) return <div>Please login to view bookings</div>;
-  if (isLoading) return <div>Loading your bookings...</div>;
+  if (isLoading) return <Loading></Loading>
   if (isError) return <div>Error loading your bookings</div>;
 
   return (

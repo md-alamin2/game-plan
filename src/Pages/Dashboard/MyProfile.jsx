@@ -6,6 +6,10 @@ import {
   FaSignOutAlt,
   FaCamera,
   FaEdit,
+  FaTableTennis,
+  FaUsers,
+  FaUserShield,
+  FaUser,
 } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -15,15 +19,20 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
 import { Link } from "react-router";
+import useUserRole from "../../Hooks/useUserRole";
+import useAdminState from "../../Hooks/useAdminState";
+import CountUp from "react-countup";
 
 const MyProfile = () => {
   const { user, logoutUser, updateUser, setLoading } = useAuth();
+  const { role, roleLoading } = useUserRole();
   const [isEditing, setIsEditing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(user?.photoURL || "");
   const fileInputRef = useRef(null);
   const axiosInstance = useAxios();
+  const { courtState, membersState, usersState } = useAdminState();
 
   const {
     register,
@@ -287,10 +296,16 @@ const MyProfile = () => {
                 <h2 className="text-xl font-bold">
                   {user?.displayName || "Anonymous User"}
                 </h2>
-                <p className="text-gray-500">
-                  User since{" "}
-                  {new Date(user?.metadata?.creationTime).toLocaleDateString()}
-                </p>
+                {role === "admin" ? (
+                  ""
+                ) : (
+                  <p className="text-gray-500">
+                    User since{" "}
+                    {new Date(
+                      user?.metadata?.creationTime
+                    ).toLocaleDateString()}
+                  </p>
+                )}
               </div>
 
               {/* Details */}
@@ -303,20 +318,26 @@ const MyProfile = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <FaCalendarAlt className="text-gray-400 text-xl" />
-                  <div>
-                    <p className="text-sm text-gray-500">User Since</p>
-                    <p className="font-medium">
-                      {new Date(
-                        user?.metadata?.creationTime
-                      ).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                  </div>
+                <div>
+                  {role === "admin" ? (
+                    <p className="font-bold flex items-center gap-4"><FaUser></FaUser> Admin</p>
+                  ) : (
+                    <div className="flex items-center gap-4">
+                      <FaCalendarAlt className="text-gray-400 text-xl" />
+                      <div>
+                        <p className="text-sm text-gray-500">User Since</p>
+                        <p className="font-medium">
+                          {new Date(
+                            user?.metadata?.creationTime
+                          ).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="divider"></div>
@@ -338,6 +359,70 @@ const MyProfile = () => {
             </div>
           )}
         </div>
+        {role === "admin" && (
+          <>
+            <div className="divider"></div>
+            <h3 className="font-bold text-lg px-6">Admin Dashboard</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 pt-2">
+              <div className="stat bg-base-100 rounded-lg shadow p-4">
+                <div className="stat-figure text-primary">
+                  <FaTableTennis className="text-2xl" />
+                </div>
+                <div className="stat-title">Total Courts</div>
+                <div className="stat-value text-primary">
+                  {roleLoading ? (
+                    "..."
+                  ) : (
+                    <CountUp
+                      end={courtState?.length}
+                      duration={2.5}
+                      className="text-4xl font-bold"
+                      enableScrollSpy={true}
+                    />
+                  )}
+                </div>
+              </div>
+
+              <div className="stat bg-base-100 rounded-lg shadow p-4">
+                <div className="stat-figure text-secondary">
+                  <FaUsers className="text-2xl" />
+                </div>
+                <div className="stat-title">Total Users</div>
+                <div className="stat-value text-secondary">
+                  {roleLoading ? (
+                    "..."
+                  ) : (
+                    <CountUp
+                      end={usersState?.length}
+                      duration={2.5}
+                      className="text-4xl font-bold"
+                      enableScrollSpy={true}
+                    />
+                  )}
+                </div>
+              </div>
+
+              <div className="stat bg-base-100 rounded-lg shadow p-4">
+                <div className="stat-figure text-accent">
+                  <FaUserShield className="text-2xl" />
+                </div>
+                <div className="stat-title">Total Members</div>
+                <div className="stat-value text-accent">
+                  {roleLoading ? (
+                    "..."
+                  ) : (
+                    <CountUp
+                      end={membersState?.length}
+                      duration={2.5}
+                      className="text-4xl font-bold"
+                      enableScrollSpy={true}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
