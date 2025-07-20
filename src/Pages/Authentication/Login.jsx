@@ -14,7 +14,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { setUser, loginUser, loading } = useAuth();
+  const { setUser, loginUser, loading, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosInstance = useAxios();
@@ -40,11 +40,13 @@ const Login = () => {
             timer: 2000,
           });
           setUser(user);
+          setLoading(false)
           navigate(`${location.state ? location.state : "/"}`);
         }
       })
       .catch((error) => {
         const errorMassage = error.code;
+        setLoading(false)
         toast.error(`${errorMassage}`, {
           position: "top-right",
           autoClose: 2000,

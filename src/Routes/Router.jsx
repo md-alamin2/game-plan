@@ -9,6 +9,7 @@ import MyProfile from "../Pages/Dashboard/MyProfile";
 import PrivateRoutes from "./PrivateRoute";
 import PendingBookings from "../Pages/Dashboard/PendingBooking";
 import Announcements from "../Pages/Dashboard/Announcements";
+import BookingsApproval from "../Pages/Dashboard/BookingsApproval";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
         {
             path:"/dashboard/pending-bookings",
             element: <PrivateRoutes><PendingBookings></PendingBookings></PrivateRoutes>
+        },
+        {
+            path:"/dashboard/Bookings-approval",
+            element: <PrivateRoutes><BookingsApproval></BookingsApproval></PrivateRoutes>
         },
         {
           path: "/dashboard/announcements",
