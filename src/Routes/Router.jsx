@@ -11,6 +11,7 @@ import PendingBookings from "../Pages/Dashboard/PendingBooking";
 import Announcements from "../Pages/Dashboard/Announcements";
 import BookingsApproval from "../Pages/Dashboard/BookingsApproval";
 import ManageMembers from "../Pages/Dashboard/ManageMember";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
         {
             path:"/dashboard/manage-members",
             element: <PrivateRoutes><ManageMembers></ManageMembers></PrivateRoutes>
+        },
+        {
+            path:"/dashboard/all-users",
+            element: <PrivateRoutes><AllUsers></AllUsers></PrivateRoutes>
         },
         {
           path: "/dashboard/announcements",

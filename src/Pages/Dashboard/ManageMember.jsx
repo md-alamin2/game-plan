@@ -29,7 +29,7 @@ const ManageMembers = () => {
   // Delete member mutation
   const { mutate: deleteMember } = useMutation({
     mutationFn: async (userEmail) => {
-      await axiosSecure.delete(`members?email=${userEmail}`);
+      await axiosSecure.delete(`users?email=${userEmail}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["members"]);

@@ -6,6 +6,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserRole from "../../Hooks/useUserRole";
 import Loading from "../../Components/Sheared/Loading";
 import Swal from "sweetalert2";
+import { FaSearch } from "react-icons/fa";
 
 const Announcements = () => {
   const queryClient = useQueryClient();
@@ -130,13 +131,18 @@ const Announcements = () => {
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="mb-6">
         <div className="flex gap-2">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search announcements by title..."
-            className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div className="relative mb-6 max-w-xl">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FaSearch className="text-gray-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search announcements....."
+              className="pl-10 pr-4 py-2 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-primary"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
           {searchTerm && (
             <button
               type="button"
@@ -153,7 +159,7 @@ const Announcements = () => {
       {role === "admin" && (
         <form
           onSubmit={handleNewSubmit(createAnnouncement)}
-          className="mb-8 bg-white p-6 rounded-lg shadow-md"
+          className="mb-8 bg-white p-6 rounded-lg shadow-md border border-gray-300"
         >
           <h3 className="text-xl font-semibold mb-4">
             Create New Announcement
