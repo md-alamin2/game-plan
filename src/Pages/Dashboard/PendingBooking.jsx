@@ -40,7 +40,7 @@ const PendingBookings = () => {
   });
 
   if (!user) return <div>Please login to view bookings</div>;
-  if (isLoading) return <Loading></Loading>
+  if (isLoading) return <Loading></Loading>;
   if (isError) return <div>Error loading your bookings</div>;
 
   return (
@@ -59,6 +59,7 @@ const PendingBookings = () => {
                 <th>Type</th>
                 <th>Date</th>
                 <th>Slots</th>
+                <th>Status</th>
                 <th>Price</th>
                 <th>Actions</th>
               </tr>
@@ -66,14 +67,23 @@ const PendingBookings = () => {
             <tbody>
               {pendingBookings?.map((booking, index) => (
                 <tr key={booking._id} className="hover:bg-gray-50">
-                  <td>{index+1}</td>
+                  <td>{index + 1}</td>
                   <td className="py-2 px-4">{booking.courtName}</td>
                   <td className="py-2 px-4 ">{booking.courtType}</td>
                   <td className="py-2 px-4 ">
                     {new Date(booking.bookingDate).toLocaleDateString()}
                   </td>
-                  <td className="py-2 px-4 ">
-                    {booking.slots.join(", ")}
+                  <td className="py-2 px-4 ">{booking.slots.join(", ")}</td>
+                  <td className="py-2 px-4">
+                    {booking.status === "pending" ? (
+                      <span className="badge badge-soft badge-warning">
+                        {booking.status}
+                      </span>
+                    ) : (
+                      <span className="badge badge-soft badge-error">
+                        {booking.status}
+                      </span>
+                    )}
                   </td>
                   <td className="py-2 px-4 ">${booking.totalCost}</td>
                   <td className="py-2 px-4 ">

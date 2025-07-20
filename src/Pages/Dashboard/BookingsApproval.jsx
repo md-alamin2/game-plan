@@ -22,8 +22,8 @@ const BookingsApproval = () => {
 
   // Approve/Reject mutations
   const { mutate: updateBookingStatus } = useMutation({
-    mutationFn: async ({ id, status }) => {
-      await axiosSecure.patch(`bookings/${id}`, { status });
+    mutationFn: async ({ id, status, user }) => {
+      await axiosSecure.patch(`bookings/${id}`, { status, user });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['pendingBookings']);
@@ -34,7 +34,7 @@ const BookingsApproval = () => {
     }
   });
 
-  const handleApprove = (id) => {
+  const handleApprove = (id, user) => {
     Swal.fire({
       title: 'Approve Booking?',
       text: 'This will confirm the booking and notify the user',
@@ -44,12 +44,12 @@ const BookingsApproval = () => {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        updateBookingStatus({ id, status: 'approved' });
+        updateBookingStatus({ id, status: 'approved', user });
       }
     });
   };
 
-  const handleReject = (id) => {
+  const handleReject = (id,) => {
     Swal.fire({
       title: 'Reject Booking?',
       text: 'This will cancel the booking request',
@@ -103,7 +103,7 @@ const BookingsApproval = () => {
                   <td className="px-4 py-3">${booking.totalCost}</td>
                   <td className="px-4 py-3 flex gap-2">
                     <button
-                      onClick={() => handleApprove(booking._id)}
+                      onClick={() => handleApprove(booking._id, booking.user)}
                       className="btn btn-sm btn-success text-white"
                       title="Approve"
                     >

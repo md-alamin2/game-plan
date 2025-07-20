@@ -59,7 +59,10 @@ const DashboardLayout = () => {
             <NavLink to="/dashboard/pending-bookings">Pending Bookings</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/bookings-approval"> bookings approval</NavLink>
+            <NavLink to="/dashboard/bookings-approval">Bookings approval</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/manage-members">Manage Members</NavLink>
           </li>
           <li>
             <NavLink to="/dashboard/announcements">Announcements</NavLink>
