@@ -1,10 +1,12 @@
 import React from "react";
 import Logo from "../../Components/Logo/Logo";
-import { NavLink, Outlet, useNavigation } from "react-router";
+import { NavLink, Outlet, useLocation, useNavigation } from "react-router";
 import Loading from "../../Components/Sheared/Loading";
 
 const DashboardLayout = () => {
   const navigation = useNavigation();
+  const active = "font-semibold bg-primary text-white";
+  const location = useLocation();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -49,26 +51,56 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+        <ul className="menu gap-2 bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Sidebar content here */}
           <Logo></Logo>
           <li>
-            <NavLink to="/dashboard">My Profile</NavLink>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) => (isActive && location.pathname==="/dashboard" ? active : "font-medium")}
+            >
+              My Profile
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/pending-bookings">Pending Bookings</NavLink>
+            <NavLink
+              to="/dashboard/pending-bookings"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              Pending Bookings
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/bookings-approval">Bookings approval</NavLink>
+            <NavLink
+              to="/dashboard/bookings-approval"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              Bookings approval
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/manage-members">Manage Members</NavLink>
+            <NavLink
+              to="/dashboard/manage-members"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              Manage Members
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/all-users">All Users</NavLink>
+            <NavLink
+              to="/dashboard/all-users"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              All Users
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/announcements">Announcements</NavLink>
+            <NavLink
+              to="/dashboard/announcements"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              Announcements
+            </NavLink>
           </li>
         </ul>
       </div>
