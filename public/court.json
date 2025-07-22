@@ -2,191 +2,151 @@
   {
     "name": "Center Court Tennis",
     "sportType": "Tennis",
-    "rating": 4.9,
     "description": "Our premier tennis court with professional-grade acrylic surface",
     "price": 45,
     "priceUnit": "hour",
     "features": ["Professional Surface", "Ball Machine", "Night Lighting"],
     "slots": [
-      { "time": "09:00", "available": true },
-      { "time": "11:00", "available": true },
-      { "time": "14:00", "available": true },
-      { "time": "16:00", "available": true },
-      { "time": "18:00", "available": true },
-      { "time": "20:00", "available": true }
+      { "startTime": "09:00", "endTime": "11:00", "available": true },
+      { "startTime": "11:00", "endTime": "13:00", "available": true },
+      { "startTime": "14:00", "endTime": "16:00", "available": true },
+      { "startTime": "16:00", "endTime": "18:00", "available": true }
     ],
-    "image": "https://i.ibb.co/hF2vJyjg/j-schiemann-Z4-Sxy1-3wd-Y-unsplash.jpg",
-    "capacity": 4
+    "image": "https://i.ibb.co/hF2vJyjg/j-schiemann-Z4-Sxy1-3wd-Y-unsplash.jpg"
   },
   {
     "name": "Championship Badminton",
     "sportType": "Badminton",
-    "rating": 4.7,
     "description": "Olympic-standard badminton court with wooden flooring",
     "price": 30,
     "priceUnit": "hour",
     "features": ["Tournament Nets", "Air Conditioning", "Shuttlecock Service"],
     "slots": [
-      { "time": "08:00", "available": true },
-      { "time": "10:00", "available": true },
-      { "time": "12:00", "available": true },
-      { "time": "15:00", "available": true },
-      { "time": "17:00", "available": true },
-      { "time": "19:00", "available": true }
+      { "startTime": "08:00", "endTime": "10:00", "available": true },
+      { "startTime": "10:00", "endTime": "12:00", "available": true },
+      { "startTime": "12:00", "endTime": "14:00", "available": true },
+      { "startTime": "15:00", "endTime": "17:00", "available": true }
     ],
-    "image": "https://i.ibb.co/C5pFmDm3/muktasim-azlan-p-Pf-OLOK0oe-I-unsplash.jpg",
-    "capacity": 6
+    "image": "https://i.ibb.co/C5pFmDm3/muktasim-azlan-p-Pf-OLOK0oe-I-unsplash.jpg"
   },
   {
     "name": "Elite Cricket Nets",
     "sportType": "Cricket",
-    "rating": 4.8,
     "description": "Professional cricket practice nets with bowling machines",
     "price": 50,
     "priceUnit": "hour",
     "features": ["Bowling Machines", "Turf Pitch", "Coaching Available"],
     "slots": [
-      { "time": "07:00", "available": true },
-      { "time": "09:30", "available": true },
-      { "time": "12:30", "available": true },
-      { "time": "14:30", "available": true },
-      { "time": "16:30", "available": true },
-      { "time": "18:30", "available": true }
+      { "startTime": "07:00", "endTime": "09:30", "available": true },
+      { "startTime": "09:30", "endTime": "12:00", "available": true },
+      { "startTime": "12:30", "endTime": "15:00", "available": true },
+      { "startTime": "14:30", "endTime": "17:00", "available": true }
     ],
-    "image": "https://i.ibb.co/tP8JgvCL/arj-B42-Zi-P-2vx0-unsplash.jpg",
-    "capacity": 6
+    "image": "https://i.ibb.co/tP8JgvCL/arj-B42-Zi-P-2vx0-unsplash.jpg"
   },
   {
     "name": "Grand Slam Clay Court",
     "sportType": "Tennis",
-    "rating": 4.9,
     "description": "French Open-style red clay court with perfect drainage",
     "price": 55,
     "priceUnit": "hour",
     "features": ["Red Clay Surface", "Ball Boys Available", "Sunset View"],
     "slots": [
-      { "time": "10:00", "available": true },
-      { "time": "12:00", "available": true },
-      { "time": "14:00", "available": true },
-      { "time": "16:00", "available": true },
-      { "time": "18:00", "available": true }
+      { "startTime": "10:00", "endTime": "12:00", "available": true },
+      { "startTime": "12:00", "endTime": "14:00", "available": true },
+      { "startTime": "14:00", "endTime": "16:00", "available": true },
+      { "startTime": "16:00", "endTime": "18:00", "available": true }
     ],
-    "image": "https://i.ibb.co/5hFWC0n8/tennis-court-2.jpg",
-    "capacity": 4
+    "image": "https://i.ibb.co/5hFWC0n8/tennis-court-2.jpg"
   },
   {
     "name": "Pro Football Turf",
     "sportType": "Football",
-    "rating": 4.6,
     "description": "FIFA-approved artificial turf for 5-a-side matches",
     "price": 80,
     "priceUnit": "hour",
     "features": ["Floodlights", "Changing Rooms", "Goal Posts"],
     "slots": [
-      { "time": "08:00", "available": true },
-      { "time": "11:00", "available": true },
-      { "time": "13:00", "available": true },
-      { "time": "15:00", "available": true },
-      { "time": "17:00", "available": true },
-      { "time": "19:00", "available": true },
-      { "time": "21:00", "available": true }
+      { "startTime": "08:00", "endTime": "10:00", "available": true },
+      { "startTime": "11:00", "endTime": "13:00", "available": true },
+      { "startTime": "13:00", "endTime": "15:00", "available": true },
+      { "startTime": "15:00", "endTime": "17:00", "available": true }
     ],
-    "image": "https://i.ibb.co/351V2qHJ/virgil-cayasa-qhf-R7-Cl-ZABA-unsplash.jpg",
-    "capacity": 10
+    "image": "https://i.ibb.co/351V2qHJ/virgil-cayasa-qhf-R7-Cl-ZABA-unsplash.jpg"
   },
   {
     "name": "Badminton Premier Court",
     "sportType": "Badminton",
-    "rating": 4.5,
     "description": "Tournament-grade court with cushioned flooring",
     "price": 25,
     "priceUnit": "hour",
     "features": ["Shock Absorption", "Tournament Lines", "Ventilation System"],
     "slots": [
-      { "time": "07:30", "available": true },
-      { "time": "09:30", "available": true },
-      { "time": "11:30", "available": true },
-      { "time": "13:30", "available": true },
-      { "time": "15:30", "available": true },
-      { "time": "17:30", "available": true }
+      { "startTime": "07:30", "endTime": "09:30", "available": true },
+      { "startTime": "09:30", "endTime": "11:30", "available": true },
+      { "startTime": "11:30", "endTime": "13:30", "available": true },
+      { "startTime": "13:30", "endTime": "15:30", "available": true }
     ],
-    "image": "https://i.ibb.co/HfxDRTMn/muktasim-azlan-rj-Wf-NR-AC5g-unsplash.jpg",
-    "capacity": 4
+    "image": "https://i.ibb.co/HfxDRTMn/muktasim-azlan-rj-Wf-NR-AC5g-unsplash.jpg"
   },
   {
     "name": "Hard Court Tennis",
     "sportType": "Tennis",
-    "rating": 4.7,
     "description": "US Open-style hard court with consistent bounce",
     "price": 40,
     "priceUnit": "hour",
     "features": ["Plexicushion Surface", "Ball Machine", "Shaded Seating"],
     "slots": [
-      { "time": "08:00", "available": true },
-      { "time": "10:00", "available": true },
-      { "time": "12:00", "available": true },
-      { "time": "14:00", "available": true },
-      { "time": "16:00", "available": true },
-      { "time": "18:00", "available": true }
+      { "startTime": "08:00", "endTime": "10:00", "available": true },
+      { "startTime": "10:00", "endTime": "12:00", "available": true },
+      { "startTime": "12:00", "endTime": "14:00", "available": true },
+      { "startTime": "14:00", "endTime": "16:00", "available": true }
     ],
-    "image": "https://i.ibb.co/N6TwV1j2/tennis-court-3.jpg",
-    "capacity": 4
+    "image": "https://i.ibb.co/N6TwV1j2/tennis-court-3.jpg"
   },
   {
     "name": "Cricket Practice Ground",
     "sportType": "Cricket",
-    "rating": 4.7,
     "description": "Full-length cricket pitch with professional coaching",
     "price": 120,
     "priceUnit": "hour",
     "features": ["Grass Pitch", "Bowling Machines", "Electronic Scoreboard"],
     "slots": [
-      { "time": "07:00", "available": true },
-      { "time": "09:00", "available": true },
-      { "time": "11:00", "available": true },
-      { "time": "13:00", "available": true },
-      { "time": "15:00", "available": true },
-      { "time": "17:00", "available": true },
-      { "time": "19:00", "available": true }
+      { "startTime": "07:00", "endTime": "09:00", "available": true },
+      { "startTime": "09:00", "endTime": "11:00", "available": true },
+      { "startTime": "11:00", "endTime": "13:00", "available": true },
+      { "startTime": "13:00", "endTime": "15:00", "available": true }
     ],
-    "image": "https://i.ibb.co/qMhqrM4V/john-oswald-Ol-Ud-NXv-Xzm-Q-unsplash.jpg",
-    "capacity": 22
+    "image": "https://i.ibb.co/qMhqrM4V/john-oswald-Ol-Ud-NXv-Xzm-Q-unsplash.jpg"
   },
   {
     "name": "Mini Football Arena",
     "sportType": "Football",
-    "rating": 4.4,
     "description": "Indoor 7-a-side pitch with synthetic turf",
     "price": 70,
     "priceUnit": "hour",
     "features": ["Indoor Facility", "Heated Seating", "Locker Rooms"],
     "slots": [
-      { "time": "09:00", "available": true },
-      { "time": "11:00", "available": true },
-      { "time": "13:00", "available": true },
-      { "time": "15:00", "available": true },
-      { "time": "17:00", "available": true },
-      { "time": "19:00", "available": true },
-      { "time": "21:00", "available": true }
+      { "startTime": "09:00", "endTime": "11:00", "available": true },
+      { "startTime": "11:00", "endTime": "13:00", "available": true },
+      { "startTime": "13:00", "endTime": "15:00", "available": true },
+      { "startTime": "15:00", "endTime": "17:00", "available": true }
     ],
-    "image": "https://i.ibb.co/3yG25xGb/peter-glaser-q-Ws-Wa1-Jr-KM-unsplash.jpg",
-    "capacity": 14
+    "image": "https://i.ibb.co/3yG25xGb/peter-glaser-q-Ws-Wa1-Jr-KM-unsplash.jpg"
   },
   {
     "name": "Grass Court Tennis",
     "sportType": "Tennis",
-    "rating": 4.9,
     "description": "Wimbledon-style grass court with professional maintenance",
     "price": 65,
     "priceUnit": "hour",
     "features": ["Natural Grass", "White Line Markings", "Royal Box Seating"],
     "slots": [
-      { "time": "10:00", "available": true },
-      { "time": "12:00", "available": true },
-      { "time": "14:00", "available": true },
-      { "time": "16:00", "available": true }
+      { "startTime": "10:00", "endTime": "12:00", "available": true },
+      { "startTime": "12:00", "endTime": "14:00", "available": true },
+      { "startTime": "14:00", "endTime": "16:00", "available": true },
+      { "startTime": "16:00", "endTime": "18:00", "available": true }
     ],
-    "image": "https://i.ibb.co/KxywbTJc/tennis-court-4.jpg",
-    "capacity": 4
+    "image": "https://i.ibb.co/KxywbTJc/tennis-court-4.jpg"
   }
 ]

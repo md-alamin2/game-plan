@@ -5,13 +5,12 @@ const CourtCard = ({ court }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="card bg-base-100 shadow-md hover:shadow-xl hover:scale-102 transition hover:duration-500">
+    <div className="card h-full bg-base-100 shadow-md hover:shadow-xl hover:scale-102 transition hover:duration-500">
       <figure className="relative">
         <img className="h-60 w-full" src={court.image} alt={court.name} />
         <span className="badge badge-secondary absolute top-2 left-2">
           {court.sportType}
         </span>
-        <span className="badge badge-primary absolute top-2 right-2">⭐ {court.rating}</span>
       </figure>
       <div className="card-body text-start">
         <div className="flex justify-between items-start">
@@ -34,7 +33,7 @@ const CourtCard = ({ court }) => {
           <div className="flex flex-wrap gap-2 mt-2">
             {court.slots.slice(0, court.displayedSlots || 3).map((slot, i) => (
               <span key={i} className="badge badge-outline">
-                {typeof slot === "string" ? slot : slot.time}
+                {typeof slot === "string" ? slot : <span>{slot.startTime} - {slot.endTime}</span>}
               </span>
             ))}
             {court.slots.length > 3 && (

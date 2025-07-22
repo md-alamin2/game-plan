@@ -133,23 +133,27 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                     />
                   </div>
 
-                  <div>
+                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Available Time Slots
                     </label>
                     <div className="mt-2 grid grid-cols-3 gap-2">
-                      {court.slots.map((slot) => (
+                      {court.slots.map((slot, index) => (
                         <button
-                          key={slot.time}
+                          key={index}
                           type="button"
-                          onClick={() => toggleSlot(slot.time)}
+                          onClick={() => toggleSlot(slot)}
                           className={`btn text-sm ${
-                            selectedSlots.includes(slot.time)
+                            selectedSlots.some(s => 
+                              s.startTime === slot.startTime && 
+                              s.endTime === slot.endTime
+                            )
                               ? "btn-primary text-white"
                               : " text-gray-800 hover:bg-gray-200"
                           }`}
+                          disabled={!slot.available}
                         >
-                          {slot.time} {slot.available ? "" : "(Unavailable)"}
+                          {slot.startTime} - {slot.endTime}
                         </button>
                       ))}
                     </div>
@@ -169,7 +173,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                 <div className="mt-6 flex justify-between">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 cursor-pointer"
+                    className="btn btn-secondary text-white cursor-pointer"
                     onClick={closeModal}
                   >
                     Cancel
@@ -177,7 +181,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                   <PrivateRoutes>
                     <button
                       type="button"
-                      className="btn btn-primary text-sm font-medium text-white focus:outline-none focus-visible:ring-2 cursor-pointer"
+                      className="btn btn-primary text-white cursor-pointer"
                       onClick={HandleBookingSlot}
                       disabled={!selectedDate || selectedSlots.length === 0}
                     >

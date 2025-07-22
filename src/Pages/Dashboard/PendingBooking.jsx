@@ -73,7 +73,13 @@ const PendingBookings = () => {
                   <td className="py-2 px-4 ">
                     {new Date(booking.bookingDate).toLocaleDateString()}
                   </td>
-                  <td className="py-2 px-4 ">{booking.slots.join(", ")}</td>
+                  <td className="py-2 px-4 ">
+                    {booking.slots.map((slot, i) => (
+                      <div key={i}>
+                        {slot.startTime} - {slot.endTime}
+                      </div>
+                    ))}
+                  </td>
                   <td className="py-2 px-4">
                     {booking.status === "pending" ? (
                       <span className="badge badge-soft badge-warning">
