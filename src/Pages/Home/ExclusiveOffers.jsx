@@ -1,33 +1,18 @@
-import ExclusiveOfferCard from "../../Components/Sheared/ExclusiveOfferCard";
+import CouponCard from "../../Components/Sheared/CouponCard";
+import useAxios from "../../Hooks/useAxios";
+import { useQuery } from '@tanstack/react-query';
 
 const ExclusiveOffers = () => {
-  // todo: fetch offers from API
-  const offers = [
-    {
-      id: 1,
-      title: "New Member Special",
-      discount: "20%",
-      description: "Get 20% off your first month membership",
-      code: "WELCOME20",
-      icon: "🎉",
+  const axiosInstance = useAxios()
+
+  // Fetch coupons
+  const { data: coupons = [], isLoading, refetch } = useQuery({
+    queryKey: ['coupons'],
+    queryFn: async () => {
+      const res = await axiosInstance.get('/coupons');
+      return res.data;
     },
-    {
-      id: 2,
-      title: "Summer Season Pass",
-      discount: "15%",
-      description: "15% off summer court bookings",
-      code: "SUMMER15",
-      icon: "☀️",
-    },
-    {
-      id: 3,
-      title: "Refer a Friend",
-      discount: "10%",
-      description: "10% off when you bring a friend",
-      code: "FRIEND10",
-      icon: "👫",
-    },
-  ];
+  });
 
   return (
     <div className="py-16 bg-base-100">
@@ -44,11 +29,11 @@ const ExclusiveOffers = () => {
 
         {/* Offers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {offers.map((offer) => (
-            <ExclusiveOfferCard
-              key={offer.id}
-              offer={offer}
-            ></ExclusiveOfferCard>
+          {coupons.map((coupon) => (
+            <CouponCard
+              key={coupon._id}
+              coupon={coupon}
+            ></CouponCard>
           ))}
         </div>
       </div>

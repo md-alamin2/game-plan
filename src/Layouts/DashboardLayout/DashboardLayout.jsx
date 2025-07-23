@@ -104,6 +104,14 @@ const DashboardLayout = () => {
           </li>
           <li>
             <NavLink
+              to="/dashboard/manage-coupons"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+            Manage Coupons
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard/announcements"
               className={({ isActive }) => (isActive ? active : "font-medium")}
             >

@@ -20,7 +20,7 @@ const ManageCourts = () => {
   const [editingCourt, setEditingCourt] = useState(null);
 
   // Fetch all courts with search
-  const { data: courts = [], isLoading, refetch } = useQuery({
+  const { data: courts = [], isLoading } = useQuery({
     queryKey: ["courts", searchTerm],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`courts?search=${searchTerm}`);
