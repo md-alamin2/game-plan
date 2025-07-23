@@ -14,6 +14,7 @@ import ManageMembers from "../Pages/Dashboard/ManageMember";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import ManageCourts from "../Pages/Dashboard/ManageCourts/ManageCourts";
 import ManageCoupons from "../Pages/Dashboard/ManageCoupons/ManageCoupons";
+import ApprovedBookings from "../Pages/Dashboard/ApprovedBookings";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
         {
             path:"/dashboard/pending-bookings",
             element: <PrivateRoutes><PendingBookings></PendingBookings></PrivateRoutes>
+        },
+        {
+            path:"/dashboard/approved-bookings",
+            element: <PrivateRoutes><ApprovedBookings></ApprovedBookings></PrivateRoutes>
         },
         {
             path:"/dashboard/Bookings-approval",
