@@ -54,7 +54,7 @@ const PendingBookings = () => {
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
               <tr className="bg-gray-100">
-                <th></th>
+                <th>#</th>
                 <th>Court</th>
                 <th>Type</th>
                 <th>Date</th>
