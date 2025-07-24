@@ -18,6 +18,10 @@ import ApprovedBookings from "../Pages/Dashboard/ApprovedBookings";
 import PaymentPage from "../Pages/Dashboard/Payments/PaymentPage";
 import ConfirmedBookings from "../Pages/Dashboard/ConfirmedBookings";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
+import ManageConfirmedBookings from "../Pages/Dashboard/ManageConfirmedBookings";
+import AdminRoute from "./AdminRoute";
+import ForbiddenPage from "../Components/Sheared/ForbiddenPage";
+import ErrorPage from "../Components/Sheared/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +45,7 @@ export const router = createBrowserRouter([
         Component: Register,
       },
     ],
+    errorElement:<ErrorPage></ErrorPage>
   },
   {
     path: "/dashboard",
@@ -72,28 +77,38 @@ export const router = createBrowserRouter([
         },
         {
             path:"/dashboard/Bookings-approval",
-            element: <PrivateRoutes><BookingsApproval></BookingsApproval></PrivateRoutes>
+            element: <AdminRoute><BookingsApproval></BookingsApproval></AdminRoute>
         },
         {
             path:"/dashboard/manage-members",
-            element: <PrivateRoutes><ManageMembers></ManageMembers></PrivateRoutes>
+            element: <AdminRoute><ManageMembers></ManageMembers></AdminRoute>
         },
         {
             path:"/dashboard/all-users",
-            element: <PrivateRoutes><AllUsers></AllUsers></PrivateRoutes>
+            element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
         },
         {
             path:"/dashboard/manage-courts",
-            element: <PrivateRoutes><ManageCourts></ManageCourts></PrivateRoutes>
+            element: <AdminRoute><ManageCourts></ManageCourts></AdminRoute>
         },
         {
             path:"/dashboard/manage-coupons",
-            element: <PrivateRoutes><ManageCoupons></ManageCoupons></PrivateRoutes>
+            element: <AdminRoute><ManageCoupons></ManageCoupons></AdminRoute>
+        },
+        {
+            path:"/dashboard/manage-confirmed-bookings",
+            element: <AdminRoute><ManageConfirmedBookings></ManageConfirmedBookings></AdminRoute>
         },
         {
           path: "/dashboard/announcements",
           element:<PrivateRoutes><Announcements></Announcements></PrivateRoutes>
         }
     ],
+    errorElement:<ErrorPage></ErrorPage>
   },
+  {
+    path:"/forbidden",
+    Component: ForbiddenPage
+  },
+  
 ]);

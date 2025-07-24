@@ -36,7 +36,7 @@ const PaymentHistory = () => {
         <h2 className="text-2xl font-bold">Payment History</h2>
         <button
           onClick={() => setViewType(viewType === "table" ? "card" : "table")}
-          className="flex items-center gap-2 px-4 py-2 mb-4 text-sm font-semibold transition-all duration-300 border rounded-full shadow hover:shadow-md hover:bg-primary hover:text-white border-gray-300"
+          className="flex items-center gap-2 px-4 py-2 mb-4 text-sm font-semibold transition-all duration-300 border rounded-full shadow hover:shadow-md hover:bg-primary hover:text-white border-gray-300 cursor-pointer"
         >
           {viewType === "table" ? (
             <>
@@ -120,7 +120,7 @@ const PaymentHistory = () => {
               </p>
 
               <p className="flex items-center gap-2">
-                <FaGift  className="text-primary"/>
+                <FaGift className="text-primary" />
                 <span className="font-semibold">Discount:</span>{" "}
                 {payment.discountAmount
                   ? `$${payment.discountAmount}`

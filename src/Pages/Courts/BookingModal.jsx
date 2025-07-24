@@ -35,6 +35,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
       courtType: court.sportType,
       user: user?.email,
       bookingDate: new Date(selectedDate),
+      booking_at:new Date(),
       slots: selectedSlots,
       totalCost,
       status: "pending",

@@ -112,7 +112,7 @@ const PaymentForm = ({ booking }) => {
               title: "Payment Successfully",
               icon: "success",
             });
-            navigate("/dashboard/approved-bookings")
+            navigate("/dashboard/confirmed-bookings")
           }
         }
       } catch (error) {
