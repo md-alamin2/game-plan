@@ -46,7 +46,7 @@ const ApprovedBookings = () => {
   });
 
   const handlePayment = (bookingId) => {
-    navigate(`/dashboard/payment-form?bookingId=${bookingId}`);
+    navigate(`/dashboard/payment-page/${bookingId}`);
   };
 
   const handleCancel = (bookingId) => {

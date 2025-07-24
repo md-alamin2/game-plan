@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const BookingModal = ({ court, isOpen, closeModal }) => {
+  const availableSlots = court.slots.filter(s=>s.available ===true);
   const { user } = useAuth();
   const axiosInstance = useAxios();
   const navigate = useNavigate();
@@ -138,7 +139,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                       Available Time Slots
                     </label>
                     <div className="mt-2 grid grid-cols-3 gap-2">
-                      {court.slots.map((slot, index) => (
+                      {availableSlots.map((slot, index) => (
                         <button
                           key={index}
                           type="button"

@@ -3,6 +3,7 @@ import BookingModal from "./BookingModal";
 
 const CourtCard = ({ court }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const availableSlots = court.slots.filter(s=>s.available ===true);
 
   return (
     <div className="card h-full bg-base-100 shadow-md hover:shadow-xl hover:scale-102 transition hover:duration-500">
@@ -31,14 +32,14 @@ const CourtCard = ({ court }) => {
         <div className="my-3">
           <h3 className="font-semibold">Available Today:</h3>
           <div className="flex flex-wrap gap-2 mt-2">
-            {court.slots.slice(0, court.displayedSlots || 3).map((slot, i) => (
-              <span key={i} className="badge badge-outline">
-                {typeof slot === "string" ? slot : <span>{slot.startTime} - {slot.endTime}</span>}
+            {availableSlots.slice(0, court.displayedSlots || 3).map((slot, i) => (
+              <span key={i}>
+                {slot.available && <span className="badge badge-outline">{slot.startTime} - {slot.endTime}</span>}
               </span>
             ))}
-            {court.slots.length > 3 && (
+            {availableSlots.length > 3 && (
               <span className="badge badge-ghost">
-                +{court.slots.length - 3} more
+                +{availableSlots.length - 3} more
               </span>
             )}
           </div>

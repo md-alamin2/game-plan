@@ -28,7 +28,7 @@ const PendingBookings = () => {
   // Cancel booking mutation
   const { mutate: cancelBooking } = useMutation({
     mutationFn: async (bookingId) => {
-      await axiosSecure.delete(`cancel-bookings/${bookingId}`);
+      await axiosSecure.delete(`bookings/${bookingId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["pendingBookings", user?.email]);
