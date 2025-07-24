@@ -10,7 +10,7 @@ const ConfirmedBookings = () => {
 
   // Fetch confirmed bookings
   const { data: bookings = [], isLoading } = useQuery({
-    queryKey: ["confirmedBookings"],
+    queryKey: ["confirmedBookings", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `bookings/confirmed?user=${user.email}`
@@ -25,7 +25,7 @@ const ConfirmedBookings = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold">Confirmed Bookings</h2>
+      <h2 className="text-2xl font-bold mb-6">Confirmed Bookings</h2>
 
       {bookings.length === 0 ? (
         <div className="text-center py-12">

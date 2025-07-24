@@ -45,7 +45,7 @@ const PendingBookings = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Your Pending Bookings</h2>
+      <h2 className="text-2xl font-bold mb-6">Your Pending Bookings</h2>
 
       {pendingBookings?.length === 0 ? (
         <p>You have no pending bookings</p>

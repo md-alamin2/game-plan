@@ -17,6 +17,7 @@ import ManageCoupons from "../Pages/Dashboard/ManageCoupons/ManageCoupons";
 import ApprovedBookings from "../Pages/Dashboard/ApprovedBookings";
 import PaymentPage from "../Pages/Dashboard/Payments/PaymentPage";
 import ConfirmedBookings from "../Pages/Dashboard/ConfirmedBookings";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
         {
             path:"/dashboard/confirmed-bookings",
             element: <PrivateRoutes><ConfirmedBookings></ConfirmedBookings></PrivateRoutes>
+        },
+        {
+            path:"/dashboard/payment-history",
+            element: <PrivateRoutes><PaymentHistory></PaymentHistory></PrivateRoutes>
         },
         {
             path:"/dashboard/payment-page/:bookingId",
