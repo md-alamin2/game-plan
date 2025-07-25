@@ -106,7 +106,7 @@ const Navbar = () => {
               <div className="dropdown dropdown-hover dropdown-end lg:dropdown-start">
                 <img
                   tabIndex={0}
-                  className="w-14 bg-primary p-1 rounded-full cursor-pointer"
+                  className="h-14 w-14 rounded-full ring-2 ring-primary cursor-pointer"
                   src={`${user.photoURL}`}
                   alt="user"
                 />

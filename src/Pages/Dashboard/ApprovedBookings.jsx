@@ -13,6 +13,9 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import Loading from "../../Components/Sheared/Loading";
 import useUserRole from "../../Hooks/useUserRole";
+import { useState } from "react";
+import SearchBar from "../../Components/Sheared/SearchBar";
+import EmptyState from "../../Components/Sheared/EmptyState";
 
 const ApprovedBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,12 +23,15 @@ const ApprovedBookings = () => {
   const { role } = useUserRole();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch approved bookings
   const { data: bookings = [], isLoading } = useQuery({
-    queryKey: ["approvedBookings", user.email],
+    queryKey: ["approvedBookings", user.email, searchTerm],
     queryFn: async () => {
-      const res = await axiosSecure.get(`bookings/approved?user=${user.email}`);
+      const res = await axiosSecure.get(
+        `bookings/approved?user=${user.email}&search=${searchTerm}`
+      );
       return res.data;
     },
     enabled: role === "member",
@@ -72,22 +78,39 @@ const ApprovedBookings = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-6">Approved Bookings</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold">Approved Bookings</h2>
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder={"Search Approved Bookings...."}
+        ></SearchBar>
+      </div>
 
       {isLoading ? (
         <Loading></Loading>
       ) : bookings.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-lg text-gray-500">
-            No approved bookings pending payment
-          </p>
+          <EmptyState
+            title={
+              searchTerm
+                ? "No booking match your search"
+                : "You have no pending Booking"
+            }
+            message={
+              searchTerm
+                ? "You haven't booked any Court By this name or type"
+                : "No Approved Booking Available"
+            }
+            iconType={searchTerm ? "search" : "add"}
+          />
         </div>
       ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr className="bg-gray-100">
-                <th></th>
+              <tr className="bg-gray-100 text-center">
+                <th>#</th>
                 <th>Court</th>
                 <th>Type</th>
                 <th>Date</th>
@@ -99,7 +122,7 @@ const ApprovedBookings = () => {
             </thead>
             <tbody>
               {bookings?.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50">
+                <tr key={booking._id} className="hover:bg-gray-50 text-center">
                   <td>{index + 1}</td>
                   <td className="py-2 px-4">{booking.courtName}</td>
                   <td className="py-2 px-4 ">{booking.courtType}</td>
@@ -120,7 +143,7 @@ const ApprovedBookings = () => {
                   </td>
                   <td className="py-2 px-4 ">${booking.totalCost}</td>
                   <td>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handlePayment(booking._id)}
                         className="btn btn-primary btn-sm"

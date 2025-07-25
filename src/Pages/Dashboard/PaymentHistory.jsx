@@ -11,50 +11,69 @@ import {
   FaGift,
   FaCalendarAlt,
 } from "react-icons/fa";
+import EmptyState from "../../Components/Sheared/EmptyState";
+import SearchBar from "../../Components/Sheared/SearchBar";
 
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [viewType, setViewType] = useState("table"); // 'table' or 'card'
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch confirmed payments
-  const { data: payments = [], isLoading } = useQuery({
-    queryKey: ["PaymentHistory", user.email],
+  const { data: payments = [], isLoading, } = useQuery({
+    queryKey: ["PaymentHistory", user.email, searchTerm],
     queryFn: async () => {
-      const res = await axiosSecure.get(`payments?user=${user.email}`);
+      const res = await axiosSecure.get(`payments?user=${user.email}&search=${searchTerm}`);
       return res.data;
     },
   });
 
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Payment History</h2>
-        <button
-          onClick={() => setViewType(viewType === "table" ? "card" : "table")}
-          className="flex items-center gap-2 px-4 py-2 mb-4 text-sm font-semibold transition-all duration-300 border rounded-full shadow hover:shadow-md hover:bg-primary hover:text-white border-gray-300 cursor-pointer"
-        >
-          {viewType === "table" ? (
-            <>
-              <HiOutlineSquares2X2 className="text-xl transition-transform duration-300" />
-              Card View
-            </>
-          ) : (
-            <>
-              <HiOutlineViewColumns className="text-xl transition-transform duration-300" />
-              Table View
-            </>
-          )}
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setViewType(viewType === "table" ? "card" : "table")}
+            className="flex items-center gap-2 btn  text-sm font-semibold transition-all duration-300 border shadow hover:shadow-md hover:btn-primary hover:text-white "
+          >
+            {viewType === "table" ? (
+              <>
+                <HiOutlineSquares2X2 className="text-xl transition-transform duration-300" />
+                Card View
+              </>
+            ) : (
+              <>
+                <HiOutlineViewColumns className="text-xl transition-transform duration-300" />
+                Table View
+              </>
+            )}
+          </button>
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            placeholder={"Search payments...."}
+          ></SearchBar>
+        </div>
       </div>
 
-      {payments.length === 0 ? (
+      {isLoading? <Loading />:payments.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-lg text-gray-500">No confirmed payments yet</p>
+          <EmptyState
+            title={
+              searchTerm
+                ? "No payment match your search"
+                : "You don't make any confirm payment"
+            }
+            message={
+              searchTerm
+                ? "You haven't make any payment By this court name or transaction Id"
+                : "No Confirmed Booking Available"
+            }
+            iconType={searchTerm ? "search" : "add"}
+          />
         </div>
       ) : viewType === "table" ? (
         <div className="overflow-x-auto rounded-box border border-base-content/5">

@@ -2,9 +2,25 @@ import React from "react";
 import Logo from "../../Components/Logo/Logo";
 import { NavLink, Outlet, useLocation, useNavigation } from "react-router";
 import Loading from "../../Components/Sheared/Loading";
+import {
+  FaUser,
+  FaClock,
+  FaCheckCircle,
+  FaMoneyBillWave,
+  FaHistory,
+  FaThumbsUp,
+  FaUsers,
+  FaUserFriends,
+  FaTableTennis,
+  FaCalendarAlt,
+  FaTag,
+  FaBullhorn,
+} from "react-icons/fa";
+import useUserRole from "../../Hooks/useUserRole";
 
 const DashboardLayout = () => {
   const navigation = useNavigation();
+  const { role } = useUserRole();
   const active = "font-semibold bg-primary text-white";
   const location = useLocation();
   return (
@@ -57,8 +73,13 @@ const DashboardLayout = () => {
           <li>
             <NavLink
               to="/dashboard"
-              className={({ isActive }) => (isActive && location.pathname==="/dashboard" ? active : "font-medium")}
+              className={({ isActive }) =>
+                isActive && location.pathname === "/dashboard"
+                  ? active
+                  : "font-medium"
+              }
             >
+              <FaUser className="mr-2" />
               My Profile
             </NavLink>
           </li>
@@ -67,86 +88,123 @@ const DashboardLayout = () => {
               to="/dashboard/pending-bookings"
               className={({ isActive }) => (isActive ? active : "font-medium")}
             >
+              <FaClock className="mr-2 text-amber-500" />
               Pending Bookings
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/approved-bookings"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-              Approved Bookings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/confirmed-bookings"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-              Confirmed Bookings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/payment-history"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-              Payment History
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/bookings-approval"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-              Bookings Approval
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/manage-members"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-              Manage Members
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/all-users"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-              All Users
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/manage-courts"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-            Manage Courts
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/manage-coupons"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-            Manage Coupons
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/manage-confirmed-bookings"
-              className={({ isActive }) => (isActive ? active : "font-medium")}
-            >
-            Manage Confirmed Bookings
-            </NavLink>
-          </li>
+          {role === "member" && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/approved-bookings"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaCheckCircle className="mr-2 text-blue-500" />
+                  Approved Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/confirmed-bookings"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaMoneyBillWave className="mr-2 text-green-500" />
+                  Confirmed Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/payment-history"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaHistory className="mr-2 text-purple-500" />
+                  Payment History
+                </NavLink>
+              </li>
+            </>
+          )}
+          {role === "admin" && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/bookings-approval"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaThumbsUp className="mr-2 text-teal-500" />
+                  Bookings Approval
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-members"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaUsers className="mr-2 text-indigo-500" />
+                  Manage Members
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/all-users"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaUserFriends className="mr-2 text-pink-500" />
+                  All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-courts"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaTableTennis className="mr-2 text-red-500" />
+                  Manage Courts
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-bookings"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaCalendarAlt className="mr-2 text-orange-500" />
+                  Manage Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-coupons"
+                  className={({ isActive }) =>
+                    isActive ? active : "font-medium"
+                  }
+                >
+                  <FaTag className="mr-2 text-yellow-500" />
+                  Manage Coupons
+                </NavLink>
+              </li>
+            </>
+          )}
           <li>
             <NavLink
               to="/dashboard/announcements"
               className={({ isActive }) => (isActive ? active : "font-medium")}
             >
+              <FaBullhorn className="mr-2 text-cyan-500" />
               Announcements
             </NavLink>
           </li>

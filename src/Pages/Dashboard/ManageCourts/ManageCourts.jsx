@@ -10,6 +10,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import CourtCard from "../../Courts/CourtCard";
 import Loading from "../../../Components/Sheared/Loading";
 import CourtModalForm from "./CourtsModalForm";
+import EmptyState from "../../../Components/Sheared/EmptyState";
 
 const ManageCourts = () => {
   const { role } = useUserRole();
@@ -97,9 +98,24 @@ const ManageCourts = () => {
       {isLoading ? (
         <Loading></Loading>
       ) : courts.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          {searchTerm ? "No courts match your search" : "No courts available"}
-        </div>
+        <EmptyState
+          title={
+            searchTerm ? "No courts match your search" : "No courts available"
+          }
+          message="You haven't created any Court By this name or type"
+          iconType="add"
+          actionButton={
+            <button
+              onClick={() => {
+                setEditingCourt(null);
+                setIsModalOpen(true);
+              }}
+              className="btn btn-primary text-white flex items-center gap-2"
+            >
+              <FaPlus /> Add Court
+            </button>
+          }
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {courts.map((court) => (

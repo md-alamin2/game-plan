@@ -22,6 +22,7 @@ import ManageConfirmedBookings from "../Pages/Dashboard/ManageConfirmedBookings"
 import AdminRoute from "./AdminRoute";
 import ForbiddenPage from "../Components/Sheared/ForbiddenPage";
 import ErrorPage from "../Components/Sheared/ErrorPage";
+import MemberRoute from "./MemberRoute";
 
 export const router = createBrowserRouter([
   {
@@ -61,19 +62,19 @@ export const router = createBrowserRouter([
         },
         {
             path:"/dashboard/approved-bookings",
-            element: <PrivateRoutes><ApprovedBookings></ApprovedBookings></PrivateRoutes>
+            element: <MemberRoute><ApprovedBookings></ApprovedBookings></MemberRoute>
         },
         {
             path:"/dashboard/confirmed-bookings",
-            element: <PrivateRoutes><ConfirmedBookings></ConfirmedBookings></PrivateRoutes>
+            element: <MemberRoute><ConfirmedBookings></ConfirmedBookings></MemberRoute>
         },
         {
             path:"/dashboard/payment-history",
-            element: <PrivateRoutes><PaymentHistory></PaymentHistory></PrivateRoutes>
+            element: <MemberRoute><PaymentHistory></PaymentHistory></MemberRoute>
         },
         {
             path:"/dashboard/payment-page/:bookingId",
-            element: <PrivateRoutes><PaymentPage></PaymentPage></PrivateRoutes>
+            element: <MemberRoute><PaymentPage></PaymentPage></MemberRoute>
         },
         {
             path:"/dashboard/Bookings-approval",
@@ -92,12 +93,12 @@ export const router = createBrowserRouter([
             element: <AdminRoute><ManageCourts></ManageCourts></AdminRoute>
         },
         {
-            path:"/dashboard/manage-coupons",
-            element: <AdminRoute><ManageCoupons></ManageCoupons></AdminRoute>
+            path:"/dashboard/manage-bookings",
+            element: <AdminRoute><ManageConfirmedBookings></ManageConfirmedBookings></AdminRoute>
         },
         {
-            path:"/dashboard/manage-confirmed-bookings",
-            element: <AdminRoute><ManageConfirmedBookings></ManageConfirmedBookings></AdminRoute>
+            path:"/dashboard/manage-coupons",
+            element: <AdminRoute><ManageCoupons></ManageCoupons></AdminRoute>
         },
         {
           path: "/dashboard/announcements",

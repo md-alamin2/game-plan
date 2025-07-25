@@ -3,34 +3,53 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import Loading from "../../Components/Sheared/Loading";
+import { useState } from "react";
+import SearchBar from "../../Components/Sheared/SearchBar";
+import EmptyState from "../../Components/Sheared/EmptyState";
 
 const ConfirmedBookings = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch confirmed bookings
   const { data: bookings = [], isLoading } = useQuery({
-    queryKey: ["confirmedBookings", user.email],
+    queryKey: ["confirmedBookings", user.email, searchTerm],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `bookings/confirmed?user=${user.email}`
+        `bookings/confirmed?user=${user.email}&search=${searchTerm}`
       );
       return res.data;
     },
   });
 
-  if (isLoading) {
-    return <Loading></Loading>
-  }
-
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Confirmed Bookings</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold">Confirmed Bookings</h2>
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder={"Search Confirmed Bookings...."}
+        ></SearchBar>
+      </div>
 
-      {bookings.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-lg text-gray-500">No confirmed bookings yet</p>
-        </div>
+      {isLoading ? (
+        <Loading></Loading>
+      ) : bookings.length === 0 ? (
+        <EmptyState
+          title={
+            searchTerm
+              ? "No booking match your search"
+              : "You have no Confirmed Booking"
+          }
+          message={
+            searchTerm
+              ? "You haven't booked any Court By this name or type"
+              : "No Confirmed Booking Available"
+          }
+          iconType={searchTerm ? "search" : "add"}
+        />
       ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
@@ -68,11 +87,13 @@ const ConfirmedBookings = () => {
                   </td>
                   <td className="py-2 px-4 ">
                     <button
-                      onClick={()=>Swal.fire({
-                        title: "Canceling policy",
-                        text: `Hi ${user.displayName}, thanks for your booking! Our cancellation policy: 24 hours notice is required to avoid a 30% charge for late cancellations or no-shows. Call on : +1 (555) 123-4567  to cancel your booking. Thank you`,
-                        icon: "question",
-                      })}
+                      onClick={() =>
+                        Swal.fire({
+                          title: "Canceling policy",
+                          text: `Hi ${user.displayName}, thanks for your booking! Our cancellation policy: 24 hours notice is required to avoid a 30% charge for late cancellations or no-shows. Call on : +1 (555) 123-4567  to cancel your booking. Thank you`,
+                          icon: "question",
+                        })
+                      }
                       className="btn btn-error"
                     >
                       Cancel

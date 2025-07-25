@@ -287,20 +287,15 @@ const MyProfile = () => {
               <div className="flex flex-col items-center">
                 <div className="avatar mb-4">
                   <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img
-                      src={user?.photoURL || "/default-avatar.jpg"}
-                      alt="Profile"
-                    />
+                    <img src={user?.photoURL} alt="Profile" />
                   </div>
                 </div>
-                <h2 className="text-xl font-bold">
-                  {user?.displayName || "Anonymous User"}
-                </h2>
+                <h2 className="text-xl font-bold">{user?.displayName}</h2>
                 {role === "admin" ? (
                   ""
                 ) : (
                   <p className="text-gray-500">
-                    User since{" "}
+                    {role === "member" ? "Member" : "User"} since{" "}
                     {new Date(
                       user?.metadata?.creationTime
                     ).toLocaleDateString()}
@@ -320,12 +315,16 @@ const MyProfile = () => {
 
                 <div>
                   {role === "admin" ? (
-                    <p className="font-bold flex items-center gap-4"><FaUser></FaUser> Admin</p>
+                    <p className="font-bold flex items-center gap-4">
+                      <FaUser></FaUser> Admin
+                    </p>
                   ) : (
                     <div className="flex items-center gap-4">
                       <FaCalendarAlt className="text-gray-400 text-xl" />
                       <div>
-                        <p className="text-sm text-gray-500">User Since</p>
+                        <p className="text-sm text-gray-500">
+                          {role === "member" ? "Member" : "User"} Since
+                        </p>
                         <p className="font-medium">
                           {new Date(
                             user?.metadata?.creationTime

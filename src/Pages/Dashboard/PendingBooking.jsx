@@ -3,22 +3,25 @@ import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Loading from "../../Components/Sheared/Loading";
+import { useState } from "react";
+import { FaPlus } from "react-icons/fa";
+import EmptyState from "../../Components/Sheared/EmptyState";
+import { useNavigate } from "react-router";
+import SearchBar from "../../Components/Sheared/SearchBar";
 
 const PendingBookings = () => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   // Fetch ONLY the logged-in user's pending bookings
-  const {
-    data: pendingBookings = [],
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["pendingBookings", user?.email],
+  const { data: pendingBookings = [], isLoading } = useQuery({
+    queryKey: ["pendingBookings", user?.email, searchTerm],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
-        `bookings/pending?user=${user?.email}`
+        `bookings/pending?user=${user?.email}&search=${searchTerm}`
       );
       return data;
     },
@@ -39,21 +42,39 @@ const PendingBookings = () => {
     },
   });
 
-  if (!user) return <div>Please login to view bookings</div>;
-  if (isLoading) return <Loading></Loading>;
-  if (isError) return <div>Error loading your bookings</div>;
+  
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Your Pending Bookings</h2>
-
-      {pendingBookings?.length === 0 ? (
-        <p>You have no pending bookings</p>
+    <div className="w-11/12 lg:container mx-auto p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold ">Your Pending Bookings</h2>
+        {/* search bar */}
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} placeholder={"Search Pending Bookings...."}></SearchBar>
+      </div>
+      
+      {isLoading?<Loading></Loading>:pendingBookings?.length === 0 ? (
+        <EmptyState
+          title={
+            searchTerm ? "No booking match your search" : "You have no pending Booking"
+          }
+          message={searchTerm? "You haven't booked any Court By this name or type": "Let's book a court"}
+          iconType={searchTerm? "search" :"add"}
+          actionButton={
+            <button
+              onClick={() => {
+                navigate("/courts")
+              }}
+              className="btn btn-primary text-white flex items-center gap-2"
+            >
+              <FaPlus /> Let's Book a Court
+            </button>
+          }
+        />
       ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-100 text-center">
                 <th>#</th>
                 <th>Court</th>
                 <th>Type</th>
@@ -66,7 +87,7 @@ const PendingBookings = () => {
             </thead>
             <tbody>
               {pendingBookings?.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50">
+                <tr key={booking._id} className="hover:bg-gray-50 text-center">
                   <td>{index + 1}</td>
                   <td className="py-2 px-4">{booking.courtName}</td>
                   <td className="py-2 px-4 ">{booking.courtType}</td>
