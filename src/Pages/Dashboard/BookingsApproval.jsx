@@ -103,12 +103,12 @@ const BookingsApproval = () => {
             <thead>
               <tr className="bg-gray-100 text-center">
                 <th>#</th>
-                <th className="px-4 py-2 text-left">Court</th>
-                <th className="px-4 py-2 text-left">User</th>
-                <th className="px-4 py-2 text-left">Date</th>
-                <th className="px-4 py-2 text-left">Slots</th>
-                <th className="px-4 py-2 text-left">Price</th>
-                <th className="px-4 py-2 text-left">Actions</th>
+                <th className="px-4 py-2">Court</th>
+                <th className="px-4 py-2">User</th>
+                <th className="px-4 py-2">Date</th>
+                <th className="px-4 py-2">Slots</th>
+                <th className="px-4 py-2">Price</th>
+                <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>

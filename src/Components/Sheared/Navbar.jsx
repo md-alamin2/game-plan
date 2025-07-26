@@ -27,6 +27,14 @@ const Navbar = () => {
           Courts
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/faqs"
+          className={({ isActive }) => (isActive ? active : "font-medium")}
+        >
+          FAQS
+        </NavLink>
+      </li>
     </>
   );
 

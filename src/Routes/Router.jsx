@@ -23,6 +23,7 @@ import AdminRoute from "./AdminRoute";
 import ForbiddenPage from "../Components/Sheared/ForbiddenPage";
 import ErrorPage from "../Components/Sheared/ErrorPage";
 import MemberRoute from "./MemberRoute";
+import FAQ from "../Pages/FAQ/FAQ";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/courts",
         Component: Courts,
+      },
+      {
+        path:"/faqs",
+        Component: FAQ
       },
       {
         path: "/login",

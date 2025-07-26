@@ -166,6 +166,7 @@ const ManageCoupons = () => {
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
               <tr className="bg-gray-100 text-center">
+                <th>#</th>
                 <th>Code</th>
                 <th>Discount (%)</th>
                 <th>Expiry Date</th>
@@ -175,8 +176,9 @@ const ManageCoupons = () => {
               </tr>
             </thead>
             <tbody>
-              {coupons.map((coupon) => (
+              {coupons.map((coupon, index) => (
                 <tr key={coupon._id} className="hover:bg-gray-50 text-center">
+                  <td>{index + 1}</td>
                   <td className="font-bold">{coupon.code}</td>
                   <td>{coupon.discountPercentage}%</td>
                   <td>{new Date(coupon.expiryDate).toLocaleDateString()}</td>

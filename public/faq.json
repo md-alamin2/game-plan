@@ -1,0 +1,38 @@
+[
+  {
+    "question": "How do I book a court?",
+    "answer": "To book a court, go to the Courts page, select your preferred court and slot, and click 'Book Now'. If you're not logged in, you'll be redirected to login first."
+  },
+  {
+    "question": "Can I book multiple slots at once?",
+    "answer": "Yes, you can book multiple slots for a court in one go. The total price will adjust based on the number of slots selected."
+  },
+  {
+    "question": "What happens after I book a session?",
+    "answer": "Your booking request will be sent to the admin for approval. Until approved, your booking will remain in 'Pending' status."
+  },
+  {
+    "question": "When do I become a club member?",
+    "answer": "Once your booking is approved and you complete the payment, your membership will be confirmed automatically."
+  },
+  {
+    "question": "Where can I apply coupon codes?",
+    "answer": "You can apply a coupon code on the payment page. If valid, the discount will be applied to your total price."
+  },
+  {
+    "question": "Can I cancel my booking?",
+    "answer": "Yes, you can cancel both pending and approved bookings from your dashboard. Cancelled bookings are removed from the system."
+  },
+  {
+    "question": "How can I view my payments?",
+    "answer": "Go to your dashboard and open the Payment History section to see all your past payments with details."
+  },
+  {
+    "question": "How do I access announcements?",
+    "answer": "Announcements from the club are available in your dashboard under the Announcements section."
+  },
+  {
+    "question": "What if I face issues during booking?",
+    "answer": "If you face any issues, please contact us through the information in the footer or reach out via our social channels."
+  }
+]
