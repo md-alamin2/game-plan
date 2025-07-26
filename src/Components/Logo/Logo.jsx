@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <Link to="/">
       <div className="flex items-center gap-2">
-        <img className="w-14" src={logo} alt="logo" />
+        <img className="w-12 md:w-14" src={logo} alt="logo" />
         <h3 className="text-2xl font-semibold">GamePlane</h3>
       </div>
     </Link>

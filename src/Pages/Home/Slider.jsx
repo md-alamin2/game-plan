@@ -48,16 +48,16 @@ const Slider = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               <div className="hero-overlay">
-                <div className=" flex flex-col justify-center h-full px-8 md:px-16 lg:px-24 text-white">
-                  <div className="max-w-3xl space-y-6">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                <div className=" flex flex-col justify-center h-full px-8 md:px-16 lg:px-24 text-white py-10">
+                  <div className="max-w-3xl space-y-6 text-center lg:text-left">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
                       {slide.title}
                     </h2>
                     <p className="text-xl md:text-2xl font-semibold text-primary">
                       {slide.tagline}
                     </p>
                     <p className="text-lg md:text-xl">{slide.description}</p>
-                    <div className="flex flex-wrap gap-4 mt-8">
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
                       <Link to="/courts">
                         <button className="btn btn-primary flex items-center">
                           <FaCalendarAlt /> Book Court <FaArrowRight />

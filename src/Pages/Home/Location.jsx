@@ -9,8 +9,8 @@ const Location = () => {
   const zoomLevel = 15;
 
   return (
-    <div className=" py-30 bg-base-200">
-      <div className="w-11/12 lg:container mx-auto px-4">
+    <div className="mt-18 md:mt-40 py-30 bg-base-200">
+      <div className="w-11/12 lg:container mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-2">
             Visit Our Club
@@ -72,7 +72,7 @@ const Location = () => {
           </div>
 
           {/* Right Side - Map */}
-          <div className="h-96 lg:h-full rounded-lg overflow-hidden shadow-lg">
+          <div className="h-96 lg:h-full rounded-lg overflow-hidden shadow-lg z-0">
             <MapContainer
               center={clubLocation}
               zoom={zoomLevel}

@@ -1,4 +1,5 @@
 import CouponCard from "../../Components/Sheared/CouponCard";
+import Loading from "../../Components/Sheared/Loading";
 import useAxios from "../../Hooks/useAxios";
 import { useQuery } from '@tanstack/react-query';
 
@@ -6,7 +7,7 @@ const ExclusiveOffers = () => {
   const axiosInstance = useAxios()
 
   // Fetch coupons
-  const { data: coupons = [], isLoading, refetch } = useQuery({
+  const { data: coupons = [], isLoading } = useQuery({
     queryKey: ['coupons'],
     queryFn: async () => {
       const res = await axiosInstance.get('/coupons');
@@ -14,8 +15,10 @@ const ExclusiveOffers = () => {
     },
   });
 
+  isLoading && <Loading></Loading>
+
   return (
-    <div className="py-16 bg-base-100">
+    <div className="my-18 md:my-40 bg-base-100">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">

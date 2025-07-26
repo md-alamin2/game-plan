@@ -5,8 +5,8 @@ import Footer from "../../Components/Sheared/Footer";
 
 const RootLayout = () => {
   return (
-    <div>
-      <header>
+    <div className="relative">
+      <header className="sticky top-0 z-10 backdrop-blur-md shadow-sm">
         <Navbar></Navbar>
       </header>
       <main>
