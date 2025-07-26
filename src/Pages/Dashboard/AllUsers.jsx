@@ -31,7 +31,7 @@ const AllUsers = () => {
     queryKey: ["users", searchTerm, filterRole],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
-        `/users?search=${searchTerm}&role=${filterRole}`
+        `users?search=${searchTerm}&role=${filterRole}`
       );
       return data;
     },
@@ -101,16 +101,12 @@ const AllUsers = () => {
     });
   };
 
-  if (role !== "admin") {
-    return <div className="text-center py-10">Admin access required</div>;
-  }
-
   return (
-    <div className="w-11/12 lg:container mx-auto mt-6">
+    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-3xl font-bold">Manage All Users</h2>
 
-        <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+        <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           {/* search bar */}
           <SearchBar
             searchTerm={searchTerm}

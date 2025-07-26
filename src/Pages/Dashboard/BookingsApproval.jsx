@@ -10,24 +10,24 @@ import { useState } from "react";
 import EmptyState from "../../Components/Sheared/EmptyState";
 
 const BookingsApproval = () => {
-  const { role } = useUserRole();
+  const { role, roleLoading } = useUserRole();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch pending bookings
   const {
     data: pendingBookings = [],
     isLoading,
-    refetch,
   } = useQuery({
     queryKey: ["pendingBookings", searchTerm],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`bookings/pending/all?search=${searchTerm}`);
       return data;
     },
-    enabled: role === "admin", // Only fetch if admin
+    // enabled: role === "admin"
   });
+  console.log(pendingBookings);
 
   // Approve/Reject mutations
   const { mutate: updateBookingStatus } = useMutation({
@@ -73,10 +73,12 @@ const BookingsApproval = () => {
     });
   };
 
+  isLoading && <Loading></Loading>
+
   return (
-    <div className="w-11/12 lg:container mx-auto mt-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold mb-6">Pending Bookings Approval</h2>
+    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
+        <h2 className="text-3xl text-center md:text-start font-bold">Pending Bookings Approval</h2>
 
       {/* search bar */}
       <SearchBar
@@ -85,7 +87,7 @@ const BookingsApproval = () => {
         placeholder={"Search Pending Bookings...."}
       ></SearchBar>
       </div>
-      {isLoading ? (
+      {(isLoading || roleLoading) ? (
         <Loading></Loading>
       ) : pendingBookings.length === 0 ? (
         <EmptyState
@@ -99,7 +101,7 @@ const BookingsApproval = () => {
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-100 text-center">
                 <th>#</th>
                 <th className="px-4 py-2 text-left">Court</th>
                 <th className="px-4 py-2 text-left">User</th>
@@ -111,7 +113,7 @@ const BookingsApproval = () => {
             </thead>
             <tbody>
               {pendingBookings.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50">
+                <tr key={booking._id} className="hover:bg-gray-50 text-center">
                   <td>{index + 1}</td>
                   <td className="px-4 py-3">{booking.courtName}</td>
                   <td className="px-4 py-3">{booking.user}</td>
@@ -121,12 +123,12 @@ const BookingsApproval = () => {
                   <td className="px-4 py-3">
                     {booking.slots.map((slot, i) => (
                       <div key={i}>
-                        {slot.startTime} - {slot.endTime}
+                        {slot.startTime}-{slot.endTime}
                       </div>
                     ))}
                   </td>
                   <td className="px-4 py-3">${booking.totalCost}</td>
-                  <td className="px-4 py-3 flex gap-2">
+                  <td className="px-4 py-3 flex justify-center gap-2">
                     <button
                       onClick={() => handleApprove(booking._id, booking.user)}
                       className="btn btn-sm btn-success text-white"

@@ -22,6 +22,7 @@ import useUserRole from "../../Hooks/useUserRole";
 import useAdminState from "../../Hooks/useAdminState";
 import CountUp from "react-countup";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Loading from "../../Components/Sheared/Loading";
 
 const MyProfile = () => {
   const { user, logoutUser, updateUser, setLoading } = useAuth();
@@ -32,7 +33,7 @@ const MyProfile = () => {
   const [imagePreview, setImagePreview] = useState(user?.photoURL || "");
   const fileInputRef = useRef(null)
   const axiosSecure = useAxiosSecure();
-  const { courtState, membersState, usersState } = useAdminState();
+  const { courtState, membersState, usersState, isLoading } = useAdminState();
 
   const {
     register,
@@ -155,6 +156,8 @@ const MyProfile = () => {
       }
     });
   };
+
+  isLoading && <Loading></Loading>
 
   return (
     <div className="container mx-auto p-6">
@@ -344,12 +347,12 @@ const MyProfile = () => {
                 {/* Actions */}
                 <div className="flex flex-wrap gap-4 pt-4">
                   <Link to="/dashboard/pending-bookings">
-                    <button className="btn btn-outline">
+                    <button className="btn btn-secondary text-white hidden md:flex">
                       <FaHistory className="mr-2" />
                       Pending Bookings
                     </button>
                   </Link>
-                  <button onClick={handleLogout} className="btn btn-error">
+                  <button onClick={handleLogout} className="btn btn-error w-full md:w-fit">
                     <FaSignOutAlt className="mr-2" />
                     Logout
                   </button>

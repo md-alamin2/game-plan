@@ -21,18 +21,19 @@ const PaymentHistory = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch confirmed payments
-  const { data: payments = [], isLoading, } = useQuery({
+  const { data: payments = [], isLoading } = useQuery({
     queryKey: ["PaymentHistory", user.email, searchTerm],
     queryFn: async () => {
-      const res = await axiosSecure.get(`payments?email=${user.email}&search=${searchTerm}`);
+      const res = await axiosSecure.get(
+        `payments?email=${user.email}&search=${searchTerm}`
+      );
       return res.data;
     },
   });
 
-
   return (
-    <div className="w-11/12 lg:container mx-auto mt-6">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">Payment History</h2>
         <div className="flex items-center gap-4">
           <button
@@ -59,7 +60,9 @@ const PaymentHistory = () => {
         </div>
       </div>
 
-      {isLoading? <Loading />:payments.length === 0 ? (
+      {isLoading ? (
+        <Loading />
+      ) : payments.length === 0 ? (
         <div className="text-center py-12">
           <EmptyState
             title={
@@ -111,7 +114,7 @@ const PaymentHistory = () => {
           </table>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {payments.map((payment, index) => (
             <div
               key={payment._id}
@@ -123,33 +126,49 @@ const PaymentHistory = () => {
 
               <p className="flex items-center gap-2">
                 <FaMoneyBillWave className="text-primary" />
-                <span className="font-semibold">Paid:</span> ${payment.amount}
+                <p className="font-semibold">
+                  Paid:<span className="font-normal">${payment.amount}</span>
+                </p>
               </p>
 
-              <p className="flex items-center gap-2">
+              <p className="flex flex-wrap items-center gap-2">
                 <FaReceipt className="text-primary" />
-                <span className="font-semibold">Transaction ID:</span>{" "}
-                {payment.transactionId}
+                <p className="font-semibold">
+                  Transaction ID:
+                  <span className="font-normal">{payment.transactionId}</span>
+                </p>
               </p>
 
               <p className="flex items-center gap-2">
                 <FaTag className="text-primary" />
-                <span className="font-semibold">Coupon Used:</span>{" "}
-                {payment.couponCode || "Not used"}
+                <p className="font-semibold">
+                  Coupon Used:
+                  <span className="font-normal">
+                    {payment.couponCode || "Not used"}
+                  </span>
+                </p>
               </p>
 
               <p className="flex items-center gap-2">
                 <FaGift className="text-primary" />
-                <span className="font-semibold">Discount:</span>{" "}
-                {payment.discountAmount
-                  ? `$${payment.discountAmount}`
-                  : "No Discount"}
+                <p className="font-semibold">
+                  Discount:{" "}
+                  <span className="font-normal">
+                    {payment.discountAmount
+                      ? `$${payment.discountAmount}`
+                      : "No Discount"}
+                  </span>
+                </p>
               </p>
 
               <p className="flex items-center gap-2">
                 <FaCalendarAlt className="text-primary" />
-                <span className="font-semibold">Date:</span>{" "}
-                {new Date(payment.pay_at_string).toLocaleDateString()}
+                <p className="font-semibold">
+                  Date:{" "}
+                  <span className="font-normal">
+                    {new Date(payment.pay_at_string).toLocaleDateString()}
+                  </span>
+                </p>
               </p>
             </div>
           ))}

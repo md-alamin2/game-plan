@@ -24,8 +24,8 @@ const ConfirmedBookings = () => {
   });
 
   return (
-    <div className="w-11/12 lg:container mx-auto mt-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
         <h2 className="text-3xl font-bold">Confirmed Bookings</h2>
         <SearchBar
           searchTerm={searchTerm}
@@ -54,7 +54,7 @@ const ConfirmedBookings = () => {
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-100 text-center">
                 <th>#</th>
                 <th>Court</th>
                 <th>Type</th>
@@ -66,7 +66,7 @@ const ConfirmedBookings = () => {
             </thead>
             <tbody>
               {bookings?.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50">
+                <tr key={booking._id} className="hover:bg-gray-50 text-center">
                   <td>{index + 1}</td>
                   <td className="py-2 px-4">{booking.courtName}</td>
                   <td className="py-2 px-4 ">{booking.courtType}</td>
@@ -76,7 +76,7 @@ const ConfirmedBookings = () => {
                   <td className="py-2 px-4 ">
                     {booking.slots.map((slot, i) => (
                       <div key={i}>
-                        {slot.startTime} - {slot.endTime}
+                        {slot.startTime}-{slot.endTime}
                       </div>
                     ))}
                   </td>

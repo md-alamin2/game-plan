@@ -155,7 +155,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                           }`}
                           disabled={!slot.available}
                         >
-                          {slot.startTime} - {slot.endTime}
+                          {slot.startTime}-{slot.endTime}
                         </button>
                       ))}
                     </div>

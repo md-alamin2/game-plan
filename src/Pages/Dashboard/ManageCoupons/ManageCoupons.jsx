@@ -37,7 +37,6 @@ const ManageCoupons = () => {
   const {
     data: coupons = [],
     isLoading,
-    refetch,
   } = useQuery({
     queryKey: ["coupons", searchTerm],
     queryFn: async () => {
@@ -130,10 +129,10 @@ const ManageCoupons = () => {
   if (roleLoading) return <Loading></Loading>;
 
   return (
-    <div className="w-11/12 lg:container mx-auto mt-6">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Coupons</h1>
-        <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+        <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           {/* search bar */}
           <SearchBar
             searchTerm={searchTerm}
@@ -166,7 +165,7 @@ const ManageCoupons = () => {
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr>
+              <tr className="bg-gray-100 text-center">
                 <th>Code</th>
                 <th>Discount (%)</th>
                 <th>Expiry Date</th>
@@ -177,7 +176,7 @@ const ManageCoupons = () => {
             </thead>
             <tbody>
               {coupons.map((coupon) => (
-                <tr key={coupon._id}>
+                <tr key={coupon._id} className="hover:bg-gray-50 text-center">
                   <td className="font-bold">{coupon.code}</td>
                   <td>{coupon.discountPercentage}%</td>
                   <td>{new Date(coupon.expiryDate).toLocaleDateString()}</td>

@@ -45,8 +45,8 @@ const PendingBookings = () => {
   
 
   return (
-    <div className="w-11/12 lg:container mx-auto mt-6">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         <h2 className="text-3xl font-bold ">Your Pending Bookings</h2>
         {/* search bar */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} placeholder={"Search Pending Bookings...."}></SearchBar>
@@ -72,7 +72,7 @@ const PendingBookings = () => {
         />
       ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
-          <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
+          <table className="table table-zebra table-sm lg:table-md w-full rounded-2xl">
             <thead>
               <tr className="bg-gray-100 text-center">
                 <th>#</th>
@@ -94,10 +94,10 @@ const PendingBookings = () => {
                   <td className="py-2 px-4 ">
                     {new Date(booking.bookingDate).toLocaleDateString()}
                   </td>
-                  <td className="py-2 px-4 ">
+                  <td className="py-2 px-4 flex flex-wrap items-center ">
                     {booking.slots.map((slot, i) => (
                       <div key={i}>
-                        {slot.startTime} - {slot.endTime}
+                        {slot.startTime}-{slot.endTime}
                       </div>
                     ))}
                   </td>
