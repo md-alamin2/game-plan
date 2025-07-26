@@ -14,8 +14,6 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 const PaymentPage = () => {
   const axiosSecure = useAxiosSecure();
   const {role} = useUserRole();
-  // const [loading, setLoading] = useState(false)
-  // const [clientSecret, setClientSecret] = useState('');
   const {bookingId} = useParams();
 
   const {data: booking={}, isPending} = useQuery({

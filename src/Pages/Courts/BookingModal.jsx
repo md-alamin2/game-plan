@@ -3,15 +3,15 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import useAuth from "../../Hooks/useAuth";
 import PrivateRoutes from "../../Routes/PrivateRoute";
-import useAxios from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const BookingModal = ({ court, isOpen, closeModal }) => {
   const availableSlots = court.slots.filter(s=>s.available ===true);
   const { user } = useAuth();
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlots, setSelectedSlots] = useState([]);
@@ -40,7 +40,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
       totalCost,
       status: "pending",
     };
-    const res = await axiosInstance.post("bookings", bookingData);
+    const res = await axiosSecure.post("bookings", bookingData);
     if (res.data.insertedId) {
       Swal.fire({
         title: "Request submitted successfully!",

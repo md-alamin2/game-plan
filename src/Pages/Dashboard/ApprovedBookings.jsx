@@ -12,7 +12,6 @@ import {
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import Loading from "../../Components/Sheared/Loading";
-import useUserRole from "../../Hooks/useUserRole";
 import { useState } from "react";
 import SearchBar from "../../Components/Sheared/SearchBar";
 import EmptyState from "../../Components/Sheared/EmptyState";
@@ -20,7 +19,6 @@ import EmptyState from "../../Components/Sheared/EmptyState";
 const ApprovedBookings = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const { role } = useUserRole();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,11 +28,10 @@ const ApprovedBookings = () => {
     queryKey: ["approvedBookings", user.email, searchTerm],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `bookings/approved?user=${user.email}&search=${searchTerm}`
+        `bookings/approved?email=${user.email}&search=${searchTerm}`
       );
       return res.data;
     },
-    enabled: role === "member",
   });
 
   // Cancel booking mutation
@@ -51,8 +48,8 @@ const ApprovedBookings = () => {
     },
   });
 
-  const handlePayment = (bookingId) => {
-    navigate(`/dashboard/payment-page/${bookingId}`);
+  const handlePayment = async (bookingId) => {
+        navigate(`/dashboard/payment-page/${bookingId}`);
   };
 
   const handleCancel = (bookingId) => {
@@ -72,14 +69,10 @@ const ApprovedBookings = () => {
     });
   };
 
-  if (role !== "member") {
-    return <div className="text-center py-10">Member access required</div>;
-  }
-
   return (
-    <div className="p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">Approved Bookings</h2>
+        <h2 className="text-3xl font-bold">Approved Bookings</h2>
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -146,7 +139,7 @@ const ApprovedBookings = () => {
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handlePayment(booking._id)}
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-sm text-white"
                       >
                         <FaMoneyBillWave className="mr-1" />
                         Pay

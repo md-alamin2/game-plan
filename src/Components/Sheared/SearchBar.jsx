@@ -26,7 +26,7 @@ const SearchBar = ({setSearchTerm, searchTerm, placeholder}) => {
             <button
               type="button"
               onClick={() => setSearchTerm("")}
-              className="btn btn-secondary"
+              className="btn btn-secondary text-white"
             >
               Clear
             </button>

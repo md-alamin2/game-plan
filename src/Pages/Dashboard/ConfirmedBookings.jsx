@@ -17,16 +17,16 @@ const ConfirmedBookings = () => {
     queryKey: ["confirmedBookings", user.email, searchTerm],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `bookings/confirmed?user=${user.email}&search=${searchTerm}`
+        `bookings/confirmed?email=${user.email}&search=${searchTerm}`
       );
       return res.data;
     },
   });
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">Confirmed Bookings</h2>
+        <h2 className="text-3xl font-bold">Confirmed Bookings</h2>
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}

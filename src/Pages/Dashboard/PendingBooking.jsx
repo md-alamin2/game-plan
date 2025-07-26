@@ -21,7 +21,7 @@ const PendingBookings = () => {
     queryKey: ["pendingBookings", user?.email, searchTerm],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
-        `bookings/pending?user=${user?.email}&search=${searchTerm}`
+        `bookings/pending?email=${user?.email}&search=${searchTerm}`
       );
       return data;
     },
@@ -45,9 +45,9 @@ const PendingBookings = () => {
   
 
   return (
-    <div className="w-11/12 lg:container mx-auto p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold ">Your Pending Bookings</h2>
+        <h2 className="text-3xl font-bold ">Your Pending Bookings</h2>
         {/* search bar */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} placeholder={"Search Pending Bookings...."}></SearchBar>
       </div>

@@ -6,6 +6,8 @@ import { FaSearch, FaTrash, FaUserCheck } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Loading from "../../Components/Sheared/Loading";
+import SearchBar from "../../Components/Sheared/SearchBar";
+import EmptyState from "../../Components/Sheared/EmptyState";
 // import useAuth from "../../Hooks/useAuth";
 
 const ManageMembers = () => {
@@ -34,7 +36,7 @@ const ManageMembers = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["members"]);
       toast.success("Member removed successfully");
-    //   setLoading(false);
+      //   setLoading(false);
     },
     onError: () => {
       toast.error("Failed to remove member");
@@ -52,42 +54,34 @@ const ManageMembers = () => {
       confirmButtonText: "Yes, remove!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteMember(userEmail)
+        deleteMember(userEmail);
       }
     });
   };
 
-  if (role !== "admin") {
-    return <div className="text-center py-10">Admin access required</div>;
-  }
-
   return (
-    <div className="container mx-auto p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold flex items-center gap-2">
-          <FaUserCheck className="text-blue-500" />
+        <h2 className="text-3xl font-bold flex items-center gap-2">
           Manage Members
         </h2>
-        <div className="relative mt-4 md:mt-0">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <FaSearch className="text-gray-400" />
-          </div>
-          <input
-            type="text"
-            placeholder="Search by name..."
-            className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+        {/* search bar */}
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder={"Search by name or email...."}
+        ></SearchBar>
       </div>
 
       {isLoading ? (
         <Loading></Loading>
       ) : members.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          {searchTerm ? "No members match your search" : "No members found"}
-        </div>
+        <EmptyState
+          title={
+            searchTerm ? "No member match your search" : "No member found"
+          }
+          iconType={searchTerm? "search" :""}
+        />
       ) : (
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="min-w-full divide-y divide-gray-200">

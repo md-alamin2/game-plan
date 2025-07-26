@@ -92,7 +92,7 @@ const DashboardLayout = () => {
               Pending Bookings
             </NavLink>
           </li>
-          {role === "member" && (
+          {(role === "admin" || role === "member") && (
             <>
               <li>
                 <NavLink

@@ -9,6 +9,8 @@ import useUserRole from "../../../Hooks/useUserRole";
 import { useForm } from "react-hook-form";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Loading from "../../../Components/Sheared/Loading";
+import SearchBar from "../../../Components/Sheared/SearchBar";
+import EmptyState from "../../../Components/Sheared/EmptyState";
 
 const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
@@ -39,7 +41,7 @@ const ManageCoupons = () => {
   } = useQuery({
     queryKey: ["coupons", searchTerm],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/coupons?search=${searchTerm}`);
+      const res = await axiosSecure.get(`coupons/all?search=${searchTerm}`);
       return res.data;
     },
     enabled: role === "admin",
@@ -126,26 +128,18 @@ const ManageCoupons = () => {
   };
 
   if (roleLoading) return <Loading></Loading>;
-  if (role !== "admin")
-    return <div className="text-center py-10">Unauthorized access</div>;
 
   return (
-    <div className="p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Manage Coupons</h1>
+        <h1 className="text-3xl font-bold">Manage Coupons</h1>
         <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaSearch className="text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search coupons..."
-              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
+          {/* search bar */}
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            placeholder={"Search coupons..."}
+          ></SearchBar>
 
           <button
             onClick={() => {
@@ -162,10 +156,13 @@ const ManageCoupons = () => {
       {isLoading ? (
         <Loading></Loading>
       ) : coupons.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          {searchTerm ? "No coupon match your search" : "No coupon available"}
-        </div>
-      )  :(
+        <EmptyState
+          title={
+            searchTerm ? "No coupon match your search" : "No coupon available"
+          }
+          iconType={searchTerm ? "search" : ""}
+        />
+      ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
@@ -326,6 +323,7 @@ const ManageCoupons = () => {
                               const today = new Date();
                               today.setHours(0, 0, 0, 0);
                               return (
+                                editingCoupon ||
                                 selectedDate >= today ||
                                 "Date must be in the future"
                               );

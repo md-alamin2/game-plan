@@ -11,6 +11,7 @@ import CourtCard from "../../Courts/CourtCard";
 import Loading from "../../../Components/Sheared/Loading";
 import CourtModalForm from "./CourtsModalForm";
 import EmptyState from "../../../Components/Sheared/EmptyState";
+import SearchBar from "../../../Components/Sheared/SearchBar";
 
 const ManageCourts = () => {
   const { role } = useUserRole();
@@ -60,28 +61,18 @@ const ManageCourts = () => {
     });
   };
 
-  if (role !== "admin") {
-    return <div className="text-center py-10">Admin access required</div>;
-  }
-
   return (
-    <div className="container mx-auto p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <h2 className="text-2xl font-bold">Manage Courts</h2>
+        <h2 className="text-3xl font-bold">Manage Courts</h2>
 
         <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaSearch className="text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search courts..."
-              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
+          {/* search bar */}
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            placeholder={"Search courts..."}
+          ></SearchBar>
 
           <button
             onClick={() => {
@@ -103,7 +94,7 @@ const ManageCourts = () => {
             searchTerm ? "No courts match your search" : "No courts available"
           }
           message="You haven't created any Court By this name or type"
-          iconType="add"
+          iconType={searchTerm? "search" : "add"}
           actionButton={
             <button
               onClick={() => {

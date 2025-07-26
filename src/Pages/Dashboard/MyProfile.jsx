@@ -17,11 +17,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxios from "../../Hooks/useAxios";
 import { Link } from "react-router";
 import useUserRole from "../../Hooks/useUserRole";
 import useAdminState from "../../Hooks/useAdminState";
 import CountUp from "react-countup";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyProfile = () => {
   const { user, logoutUser, updateUser, setLoading } = useAuth();
@@ -30,8 +30,8 @@ const MyProfile = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(user?.photoURL || "");
-  const fileInputRef = useRef(null);
-  const axiosInstance = useAxios();
+  const fileInputRef = useRef(null)
+  const axiosSecure = useAxiosSecure();
   const { courtState, membersState, usersState } = useAdminState();
 
   const {
@@ -95,7 +95,7 @@ const MyProfile = () => {
         photoURL: imageUrl,
       });
 
-      const res = await axiosInstance.patch(`users?email=${user.email}`, {
+      const res = await axiosSecure.patch(`users?email=${user.email}`, {
         name: data.displayName,
         image: imageUrl,
       });

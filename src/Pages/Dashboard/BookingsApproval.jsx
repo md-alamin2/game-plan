@@ -4,11 +4,16 @@ import useUserRole from "../../Hooks/useUserRole";
 import { FaCheck, FaTimes, FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Loading from "../../Components/Sheared/Loading";
+import SearchBar from "../../Components/Sheared/SearchBar";
+import { useState } from "react";
+import EmptyState from "../../Components/Sheared/EmptyState";
 
 const BookingsApproval = () => {
   const { role } = useUserRole();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+  const [searchTerm, setSearchTerm] = useState();
 
   // Fetch pending bookings
   const {
@@ -16,9 +21,9 @@ const BookingsApproval = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["pendingBookings"],
+    queryKey: ["pendingBookings", searchTerm],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`bookings/pending?role=${role}`);
+      const { data } = await axiosSecure.get(`bookings/pending/all?search=${searchTerm}`);
       return data;
     },
     enabled: role === "admin", // Only fetch if admin
@@ -68,20 +73,28 @@ const BookingsApproval = () => {
     });
   };
 
-  if (role !== "admin") {
-    return <div className="text-center py-10">Admin access required</div>;
-  }
-
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Pending Bookings Approval</h2>
+    <div className="w-11/12 lg:container mx-auto mt-6">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-bold mb-6">Pending Bookings Approval</h2>
 
+      {/* search bar */}
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        placeholder={"Search Pending Bookings...."}
+      ></SearchBar>
+      </div>
       {isLoading ? (
-        <div className="text-center">Loading...</div>
+        <Loading></Loading>
       ) : pendingBookings.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          No pending bookings
-        </div>
+        <EmptyState
+          title={
+            searchTerm ? "No booking match your search" : "No pending Booking"
+          }
+          message={searchTerm? "No pending booking court or user match your search": "There is no pending booking"}
+          iconType={searchTerm? "search" :""}
+        />
       ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
@@ -144,8 +157,9 @@ const BookingsApproval = () => {
                               <p><strong>Date:</strong> ${new Date(
                                 booking.bookingDate
                               ).toLocaleDateString()}</p>
-                              <p><strong>Slots:</strong> ${booking.slots.join(
-                                ", "
+                              <p><strong>Slots:</strong> ${booking.slots.map(
+                                (s) =>
+                                  `<span>${s.startTime} - ${s.endTime}</span>`
                               )}</p>
                               <p><strong>Price:</strong> $${
                                 booking.totalCost

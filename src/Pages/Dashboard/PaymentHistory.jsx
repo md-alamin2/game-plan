@@ -24,16 +24,16 @@ const PaymentHistory = () => {
   const { data: payments = [], isLoading, } = useQuery({
     queryKey: ["PaymentHistory", user.email, searchTerm],
     queryFn: async () => {
-      const res = await axiosSecure.get(`payments?user=${user.email}&search=${searchTerm}`);
+      const res = await axiosSecure.get(`payments?email=${user.email}&search=${searchTerm}`);
       return res.data;
     },
   });
 
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="w-11/12 lg:container mx-auto mt-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Payment History</h2>
+        <h2 className="text-3xl font-bold">Payment History</h2>
         <div className="flex items-center gap-4">
           <button
             onClick={() => setViewType(viewType === "table" ? "card" : "table")}
