@@ -149,7 +149,10 @@ const Announcements = () => {
           <h2 className="text-3xl font-bold text-gray-800">Announcements</h2>
         </div>
 
-        {/* Search Bar */}
+        
+          <div className="flex flex-col lg:flex-row items-center gap-4">
+
+            {/* Search Bar */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -161,11 +164,9 @@ const Announcements = () => {
                 placeholder={"Search announcements..."}
               />
             </motion.div>
-        {role === "admin" && (
-          <div className="flex flex-col lg:flex-row items-center gap-4">
             
 
-            {addAnnouncement?<motion.button
+            {role==="admin" && addAnnouncement?<motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn btn-error"
@@ -174,7 +175,7 @@ const Announcements = () => {
               }}
             >
               <FaTimes /> Cancel
-            </motion.button>:<motion.button
+            </motion.button>: role==="admin"&& <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn btn-primary text-white"
@@ -185,7 +186,6 @@ const Announcements = () => {
               <FaPlus /> New Announcement
             </motion.button>}
           </div>
-        )}
       </motion.div>
 
       {/* Create Form (for admins) */}

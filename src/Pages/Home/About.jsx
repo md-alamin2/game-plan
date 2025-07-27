@@ -1,5 +1,5 @@
 import { FaTrophy, FaUsers, FaHeart, FaStar } from "react-icons/fa";
-import img from "../../assets/about-img.jpg";
+import img from "../../assets/about-img-min.jpg";
 import { motion } from "framer-motion";
 
 const fadeInUp = {

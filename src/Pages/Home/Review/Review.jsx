@@ -8,18 +8,26 @@ import { useRef, useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import img from "../../../assets/profile.png";
 import useAxios from "../../../Hooks/useAxios";
+import Loading from "../../../Components/Sheared/Loading";
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
   const axiosInstance = useAxios();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [swiperReady, setSwiperReady] = useState(false);
 
   useEffect(() => {
-    axiosInstance.get("reviews").then((res) => setReviews(res.data));
+    setLoading(true);
+    axiosInstance.get("reviews").then((res) => {
+      setReviews(res.data);
+      setLoading(false);
+    });
     setSwiperReady(true);
   }, [axiosInstance]);
+
+  if (loading) return <Loading></Loading>;
 
   return (
     <div className="w-full mt-20">
@@ -109,7 +117,7 @@ const Review = () => {
       )}
 
       {/* Pagination + Navigation */}
-      <div className="flex flex-col items-center justify-center mt-4">
+      {/* <div className="flex flex-col items-center justify-center mt-4">
         <div className="flex gap-4">
           <button
             ref={prevRef}
@@ -124,7 +132,7 @@ const Review = () => {
             <FaAngleRight size={20}></FaAngleRight>
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

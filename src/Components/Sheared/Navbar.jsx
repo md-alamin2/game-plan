@@ -35,14 +35,16 @@ const Navbar = () => {
           FAQS
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/rating"
-          className={({ isActive }) => (isActive ? active : "font-medium")}
-        >
-          Rate US
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/rating"
+            className={({ isActive }) => (isActive ? active : "font-medium")}
+          >
+            Rate US
+          </NavLink>
+        </li>
+      )}
     </>
   );
 

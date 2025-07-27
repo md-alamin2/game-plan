@@ -307,14 +307,14 @@ const CourtModalForm = ({ court, onClose, onSuccess }) => {
         <button
           type="button"
           onClick={onClose}
-          className="btn btn-ghost"
+          className="btn btn-secondary text-white"
           disabled={isSubmitting || isUploading}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-primary text-white"
           disabled={isSubmitting || isUploading}
         >
           {isSubmitting || isUploading ? (

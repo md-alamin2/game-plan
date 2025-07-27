@@ -14,7 +14,7 @@ const Slider = () => {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    setLoading;
+    setLoading(true)
     axios
       .get("/slider.json")
       .then((res) => {
@@ -64,7 +64,7 @@ const Slider = () => {
                           <FaCalendarAlt /> Book Court <FaArrowRight />
                         </button>
                       </Link>
-                      <Link>
+                      <Link to="/faqs">
                         <button className="btn btn-secondary">
                           <FaInfoCircle /> Learn More <FaArrowRight />
                         </button>
