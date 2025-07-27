@@ -24,6 +24,7 @@ import ForbiddenPage from "../Components/Sheared/ForbiddenPage";
 import ErrorPage from "../Components/Sheared/ErrorPage";
 import MemberRoute from "./MemberRoute";
 import FAQ from "../Pages/FAQ/FAQ";
+import ReviewForm from "../Pages/ReviewForm/ReviewForm";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path:"/faqs",
         Component: FAQ
+      },
+      {
+        path:"/rating",
+        element: <PrivateRoutes><ReviewForm></ReviewForm></PrivateRoutes>
       },
       {
         path: "/login",
