@@ -15,6 +15,7 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlots, setSelectedSlots] = useState([]);
+  const [dateError, setDateError] = useState(false)
 
   // Calculate total cost
   const totalCost = selectedSlots.length * court.price;
@@ -28,6 +29,10 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
   };
 
   const HandleBookingSlot = async () => {
+    if(new Date(selectedDate)< new Date()){
+      return setDateError(true)
+    }
+    setDateError(false)
     // Handle booking submission
     const bookingData = {
       courtId: court._id,
@@ -133,7 +138,9 @@ const BookingModal = ({ court, isOpen, closeModal }) => {
                       onChange={(e) => setSelectedDate(e.target.value)}
                       required
                     />
+
                   </div>
+                    {dateError && <p className="text-red-500">Date should be any future date</p>}
 
                    <div>
                     <label className="block text-sm font-medium text-gray-700">

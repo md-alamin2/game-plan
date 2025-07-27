@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import Loading from "../../Components/Sheared/Loading";
 import SearchBar from "../../Components/Sheared/SearchBar";
 import EmptyState from "../../Components/Sheared/EmptyState";
+import WrapContainer from "../../Components/AnimateCompnent/WrapContainer";
+import WrapTr from "../../Components/AnimateCompnent/WrapTr";
 // import useAuth from "../../Hooks/useAuth";
 
 const ManageMembers = () => {
@@ -60,7 +62,8 @@ const ManageMembers = () => {
   };
 
   return (
-    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+    <WrapContainer>
+      <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row justify-between gap-4 items-center mb-6">
         <h2 className="text-3xl font-bold flex items-center gap-2">
           Manage Members
@@ -103,7 +106,7 @@ const ManageMembers = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {members.map((member) => (
-                <tr key={member._id} className="hover:bg-gray-50 text-center">
+                <WrapTr key={member._id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
@@ -134,13 +137,14 @@ const ManageMembers = () => {
                       <FaTrash /> Remove
                     </button>
                   </td>
-                </tr>
+                </WrapTr>
               ))}
             </tbody>
           </table>
         </div>
       )}
     </div>
+    </WrapContainer>
   );
 };
 

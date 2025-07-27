@@ -14,6 +14,8 @@ import Swal from "sweetalert2";
 import Loading from "../../Components/Sheared/Loading";
 import SearchBar from "../../Components/Sheared/SearchBar";
 import EmptyState from "../../Components/Sheared/EmptyState";
+import WrapContainer from "../../Components/AnimateCompnent/WrapContainer";
+import WrapTr from "../../Components/AnimateCompnent/WrapTr";
 
 const AllUsers = () => {
   const { role } = useUserRole();
@@ -102,7 +104,8 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+    <WrapContainer>
+      <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-3xl font-bold">Manage All Users</h2>
 
@@ -150,7 +153,7 @@ const AllUsers = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {users.map((user) => (
-                <tr key={user._id} className="hover:bg-gray-50 text-center">
+                <WrapTr key={user._id}>
                   <td className="px-6 py-4 whitespace-nowrap text-left">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
@@ -217,13 +220,14 @@ const AllUsers = () => {
                       <FaTrash />
                     </button>
                   </td>
-                </tr>
+                </WrapTr>
               ))}
             </tbody>
           </table>
         </div>
       )}
     </div>
+    </WrapContainer>
   );
 };
 

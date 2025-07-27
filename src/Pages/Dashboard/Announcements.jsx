@@ -6,7 +6,17 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserRole from "../../Hooks/useUserRole";
 import Loading from "../../Components/Sheared/Loading";
 import Swal from "sweetalert2";
-import { FaSearch } from "react-icons/fa";
+import {
+  FaSearch,
+  FaBullhorn,
+  FaEdit,
+  FaTrash,
+  FaTimes,
+  FaCheck,
+  FaPlus,
+  FaCross,
+} from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import SearchBar from "../../Components/Sheared/SearchBar";
 
 const Announcements = () => {
@@ -15,6 +25,7 @@ const Announcements = () => {
   const { role, roleLoading } = useUserRole();
   const [editingId, setEditingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [addAnnouncement, setAddAnnouncement] = useState(false);
 
   // React Hook Form for new announcement
   const {
@@ -65,6 +76,8 @@ const Announcements = () => {
         title: "Success",
         text: "Announcement posted successfully",
         icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
       });
     },
     onError: () => {
@@ -85,8 +98,10 @@ const Announcements = () => {
       setEditingId(null);
       Swal.fire({
         title: "Success",
-        text: "Announcement update successfully",
+        text: "Announcement updated successfully",
         icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
       });
     },
   });
@@ -100,12 +115,13 @@ const Announcements = () => {
       queryClient.invalidateQueries(["announcements"]);
       Swal.fire({
         title: "Deleted!",
-        text: "This announcement has been deleted",
+        text: "Announcement has been deleted",
         icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
       });
     },
   });
-
 
   const startEditing = (announcement) => {
     setEditingId(announcement._id);
@@ -121,28 +137,73 @@ const Announcements = () => {
   if (roleLoading) return <Loading></Loading>;
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-4">
-      <h2 className="text-3xl font-bold mb-6">Announcements</h2>
+    <div className="max-w-7xl mx-auto my-8 px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-8"
+      >
+        <div className="flex items-center">
+          <FaBullhorn className="text-3xl text-blue-400 mr-3" />
+          <h2 className="text-3xl font-bold text-gray-800">Announcements</h2>
+        </div>
 
-      {/* Search Bar */}
-      <div className="mb-6">
-        <SearchBar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          placeholder={"Search by title....."}
-        ></SearchBar>
-      </div>
+        {/* Search Bar */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <SearchBar
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                placeholder={"Search announcements..."}
+              />
+            </motion.div>
+        {role === "admin" && (
+          <div className="flex flex-col lg:flex-row items-center gap-4">
+            
+
+            {addAnnouncement?<motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn btn-error"
+              onClick={() => {
+                setAddAnnouncement(false)
+              }}
+            >
+              <FaTimes /> Cancel
+            </motion.button>:<motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn btn-primary text-white"
+              onClick={() => {
+                setAddAnnouncement(true)
+              }}
+            >
+              <FaPlus /> New Announcement
+            </motion.button>}
+          </div>
+        )}
+      </motion.div>
 
       {/* Create Form (for admins) */}
-      {role === "admin" && (
-        <form
-          onSubmit={handleNewSubmit(createAnnouncement)}
-          className="mb-8 bg-white p-6 rounded-lg shadow-md border border-gray-300"
+      {(role === "admin" && addAnnouncement) && (
+        <motion.div
+          id="new-announcement-form"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-10 bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-xl shadow-lg border border-indigo-100"
         >
-          <h3 className="text-xl font-semibold mb-4">
-            Create New Announcement
+          <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center">
+            <FaBullhorn className="mr-2" /> Create New Announcement
           </h3>
-          <div className="space-y-4">
+          <form
+            onSubmit={handleNewSubmit(createAnnouncement)}
+            className="space-y-4"
+          >
             <div>
               <label
                 htmlFor="title"
@@ -153,11 +214,12 @@ const Announcements = () => {
               <input
                 id="title"
                 {...registerNew("title", { required: "Title is required" })}
-                className={`w-full p-2 border rounded focus:outline-none ${
+                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
                   newErrors.title
                     ? "border-red-500 focus:ring-red-500"
-                    : "focus:ring-primary"
+                    : "border-gray-300 focus:ring-indigo-500"
                 }`}
+                placeholder="Enter announcement title"
               />
               {newErrors.title && (
                 <p className="mt-1 text-sm text-red-600">
@@ -178,11 +240,12 @@ const Announcements = () => {
                   required: "Description is required",
                 })}
                 rows={4}
-                className={`w-full p-2 border rounded focus:outline-none ${
+                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
                   newErrors.description
                     ? "border-red-500 focus:ring-red-500"
-                    : "focus:ring-blue-500"
+                    : "border-gray-300 focus:ring-indigo-500"
                 }`}
+                placeholder="Enter announcement details"
               />
               {newErrors.description && (
                 <p className="mt-1 text-sm text-red-600">
@@ -190,142 +253,187 @@ const Announcements = () => {
                 </p>
               )}
             </div>
-            <button type="submit" className="btn btn-primary text-white">
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full btn btn-primary text-white py-3 px-4 rounded-lg shadow-md transition-colors font-medium"
+            >
               Post Announcement
-            </button>
-          </div>
-        </form>
+            </motion.button>
+          </form>
+        </motion.div>
       )}
 
       {/* Announcements List */}
       {isLoading ? (
-        <Loading></Loading>
+        <Loading />
       ) : announcements.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          {searchTerm
-            ? "No announcements match your search"
-            : "No announcements yet"}
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-200"
+        >
+          <FaSearch className="mx-auto text-4xl text-gray-400 mb-4" />
+          <h3 className="text-xl font-medium text-gray-600">
+            {searchTerm ? "No matching announcements" : "No announcements yet"}
+          </h3>
+          <p className="text-gray-500 mt-2">
+            {searchTerm
+              ? "Try a different search term"
+              : "Check back later or create one"}
+          </p>
+        </motion.div>
       ) : (
-        <ul className="space-y-6">
-          {announcements.map((announcement) => (
-            <li
-              key={announcement._id}
-              className="bg-white p-6 rounded-lg shadow-sm border"
-            >
-              {editingId === announcement._id ? (
-                <form
-                  onSubmit={handleEditSubmit((data) =>
-                    updateAnnouncement({ id: announcement._id, data })
-                  )}
-                >
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Title*
-                      </label>
-                      <input
-                        {...registerEdit("title", {
-                          required: "Title is required",
-                        })}
-                        className={`w-full p-2 border rounded ${
-                          editErrors.title
-                            ? "border-red-500 focus:ring-red-500"
-                            : "focus:ring-blue-500"
-                        }`}
-                      />
-                      {editErrors.title && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {editErrors.title.message}
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Description*
-                      </label>
-                      <textarea
-                        {...registerEdit("description", {
-                          required: "Description is required",
-                        })}
-                        rows={4}
-                        className={`w-full p-2 border rounded ${
-                          editErrors.description
-                            ? "border-red-500 focus:ring-red-500"
-                            : "focus:ring-blue-500"
-                        }`}
-                      />
-                      {editErrors.description && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {editErrors.description.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <button
-                        type="submit"
-                        className="btn btn-primary text-white"
-                      >
-                        Save Changes
-                      </button>
-                      <button
-                        type="button"
-                        onClick={cancelEditing}
-                        className="btn btn-secondary text-white"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              ) : (
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    {announcement.title}
-                  </h3>
-                  <p className="whitespace-pre-wrap text-gray-700 mb-3">
-                    {announcement.description || announcement.text}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <p className="text-sm text-gray-500">
-                      Posted on:{" "}
-                      {new Date(announcement.created_at).toLocaleDateString()}
-                    </p>
-                    {role === "admin" && (
-                      <div className="space-x-2">
-                        <button
-                          onClick={() => startEditing(announcement)}
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <AnimatePresence>
+            {announcements.map((announcement) => (
+              <motion.li
+                key={announcement._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-200"
+              >
+                {editingId === announcement._id ? (
+                  <motion.form
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    onSubmit={handleEditSubmit((data) =>
+                      updateAnnouncement({ id: announcement._id, data })
+                    )}
+                  >
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Title*
+                        </label>
+                        <input
+                          {...registerEdit("title", {
+                            required: "Title is required",
+                          })}
+                          className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                            editErrors.title
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-gray-300 focus:ring-indigo-500"
+                          }`}
+                        />
+                        {editErrors.title && (
+                          <p className="mt-1 text-sm text-red-600">
+                            {editErrors.title.message}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Description*
+                        </label>
+                        <textarea
+                          {...registerEdit("description", {
+                            required: "Description is required",
+                          })}
+                          rows={4}
+                          className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                            editErrors.description
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-gray-300 focus:ring-indigo-500"
+                          }`}
+                        />
+                        {editErrors.description && (
+                          <p className="mt-1 text-sm text-red-600">
+                            {editErrors.description.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="flex gap-3">
+                        <motion.button
+                          type="submit"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                           className="btn btn-primary text-white"
                         >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() =>
-                            Swal.fire({
-                              title: "Are you sure?",
-                              text: "You won't be able to revert this!",
-                              icon: "warning",
-                              showCancelButton: true,
-                              confirmButtonColor: "#3085d6",
-                              cancelButtonColor: "#d33",
-                              confirmButtonText: "Yes, delete it!",
-                            }).then((result) => {
-                              if (result.isConfirmed) {
-                                deleteAnnouncement(announcement._id);
-                              }
-                            })
-                          }
-                          className="btn btn-error"
+                          <FaCheck /> Save
+                        </motion.button>
+                        <motion.button
+                          type="button"
+                          onClick={cancelEditing}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="btn btn-secondary text-white"
                         >
-                          Delete
-                        </button>
+                          <FaTimes /> Cancel
+                        </motion.button>
                       </div>
-                    )}
+                    </div>
+                  </motion.form>
+                ) : (
+                  <div>
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-xl font-bold text-gray-800">
+                        {announcement.title}
+                      </h3>
+                      {role === "admin" && (
+                        <div className="flex items-center gap-2">
+                          <motion.button
+                            onClick={() => startEditing(announcement)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="text-warning cursor-pointer"
+                            title="Edit"
+                          >
+                            <FaEdit />
+                          </motion.button>
+                          <motion.button
+                            onClick={() =>
+                              Swal.fire({
+                                title: "Delete Announcement?",
+                                text: "This action cannot be undone",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#d33",
+                                cancelButtonColor: "#3085d6",
+                                confirmButtonText: "Delete",
+                                cancelButtonText: "Cancel",
+                              }).then((result) => {
+                                if (result.isConfirmed) {
+                                  deleteAnnouncement(announcement._id);
+                                }
+                              })
+                            }
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="text-red-500 cursor-pointer"
+                            title="Delete"
+                          >
+                            <FaTrash />
+                          </motion.button>
+                        </div>
+                      )}
+                    </div>
+                    <p className="whitespace-pre-wrap text-gray-700 mb-4">
+                      {announcement.description || announcement.text}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <p className="text-sm text-gray-500">
+                        Posted on:{" "}
+                        {new Date(announcement.created_at).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }
+                        )}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )}
-            </li>
-          ))}
+                )}
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </ul>
       )}
     </div>

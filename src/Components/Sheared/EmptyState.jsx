@@ -27,7 +27,7 @@ const EmptyState = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`flex flex-col items-center justify-center p-8 text-center ${className}`}
+      className={`flex flex-col items-center justify-center p-8 text-center border border-gray-300 rounded-2xl max-w-xl mx-auto ${className}`}
     >
       <motion.div
         animate={{

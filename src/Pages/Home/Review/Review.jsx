@@ -7,19 +7,19 @@ import { FaAngleLeft, FaQuoteLeft } from "react-icons/fa";
 import { useRef, useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import img from "../../../assets/profile.png";
+import useAxios from "../../../Hooks/useAxios";
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
+  const axiosInstance = useAxios();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperReady, setSwiperReady] = useState(false);
 
   useEffect(() => {
-    fetch("/review.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    axiosInstance.get("reviews").then((res) => setReviews(res.data));
     setSwiperReady(true);
-  }, []);
+  }, [axiosInstance]);
 
   return (
     <div className="w-full mt-20">
@@ -52,8 +52,8 @@ const Review = () => {
             setTimeout(() => {
               swiper.navigation.init();
               swiper.navigation.update();
-              swiper.pagination.init(); 
-              swiper.pagination.render(); 
+              swiper.pagination.init();
+              swiper.pagination.render();
               swiper.pagination.update();
             });
           }}

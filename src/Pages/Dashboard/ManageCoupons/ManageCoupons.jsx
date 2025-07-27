@@ -11,6 +11,9 @@ import { FaPlus, FaSearch } from "react-icons/fa";
 import Loading from "../../../Components/Sheared/Loading";
 import SearchBar from "../../../Components/Sheared/SearchBar";
 import EmptyState from "../../../Components/Sheared/EmptyState";
+import WrapContainer from "../../../Components/AnimateCompnent/WrapContainer";
+import WrapItem from "../../../Components/AnimateCompnent/WrapItem";
+import WrapTr from "../../../Components/AnimateCompnent/WrapTr";
 
 const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
@@ -129,7 +132,8 @@ const ManageCoupons = () => {
   if (roleLoading) return <Loading></Loading>;
 
   return (
-    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+    <WrapContainer>
+      <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Coupons</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
@@ -177,7 +181,7 @@ const ManageCoupons = () => {
             </thead>
             <tbody>
               {coupons.map((coupon, index) => (
-                <tr key={coupon._id} className="hover:bg-gray-50 text-center">
+                <WrapTr key={coupon._id}>
                   <td>{index + 1}</td>
                   <td className="font-bold">{coupon.code}</td>
                   <td>{coupon.discountPercentage}%</td>
@@ -192,7 +196,7 @@ const ManageCoupons = () => {
                       {coupon.active ? "Active" : "Expired"}
                     </span>
                   </td>
-                  <td className="flex gap-2">
+                  <td className="flex justify-center gap-2">
                     <button
                       onClick={() => handleEdit(coupon)}
                       className="btn btn-sm btn-warning"
@@ -207,7 +211,7 @@ const ManageCoupons = () => {
                       {deleteMutation.isLoading ? "Deleting..." : "Delete"}
                     </button>
                   </td>
-                </tr>
+                </WrapTr>
               ))}
             </tbody>
           </table>
@@ -400,6 +404,7 @@ const ManageCoupons = () => {
         </Dialog>
       </Transition>
     </div>
+    </WrapContainer>
   );
 };
 

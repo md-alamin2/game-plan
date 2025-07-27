@@ -94,7 +94,7 @@ const ManageCourts = () => {
             searchTerm ? "No courts match your search" : "No courts available"
           }
           message="You haven't created any Court By this name or type"
-          iconType={searchTerm? "search" : "add"}
+          iconType={searchTerm ? "search" : "add"}
           actionButton={
             <button
               onClick={() => {
@@ -111,26 +111,7 @@ const ManageCourts = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
           {courts.map((court) => (
             <div key={court._id} className="relative">
-              <CourtCard court={court} />
-              <div className="absolute top-2 right-2 flex gap-2">
-                <button
-                  onClick={() => {
-                    setEditingCourt(court);
-                    setIsModalOpen(true);
-                  }}
-                  className="btn btn-sm btn-circle btn-warning text-white"
-                  title="Edit court"
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  onClick={() => handleDelete(court._id, court.name)}
-                  className="btn btn-sm btn-circle btn-error text-white"
-                  title="Delete court"
-                >
-                  <FaTrash />
-                </button>
-              </div>
+              <CourtCard court={court} handleDelete={handleDelete} setEditingCourt={setEditingCourt} setIsModalOpen={setIsModalOpen} />
             </div>
           ))}
         </div>

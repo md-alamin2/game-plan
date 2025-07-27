@@ -8,6 +8,8 @@ import Loading from "../../Components/Sheared/Loading";
 import Swal from "sweetalert2";
 import SearchBar from "../../Components/Sheared/SearchBar";
 import EmptyState from "../../Components/Sheared/EmptyState";
+import WrapContainer from "../../Components/AnimateCompnent/WrapContainer";
+import WrapTr from "../../Components/AnimateCompnent/WrapTr";
 
 const ManageConfirmedBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -64,7 +66,8 @@ const ManageConfirmedBookings = () => {
   }
 
   return (
-    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+    <WrapContainer>
+      <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">Confirmed Bookings</h2>
 
@@ -103,7 +106,7 @@ const ManageConfirmedBookings = () => {
             </thead>
             <tbody>
               {bookings?.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50 text-center">
+                <WrapTr key={booking._id}>
                   <td>{index + 1}</td>
                   <td className="py-2 px-4">{booking.courtName}</td>
                   <td className="py-2 px-4 ">{booking.courtType}</td>
@@ -149,13 +152,14 @@ const ManageConfirmedBookings = () => {
                       Cancel
                     </button>
                   </td>
-                </tr>
+                </WrapTr>
               ))}
             </tbody>
           </table>
         </div>
       )}
     </div>
+    </WrapContainer>
   );
 };
 

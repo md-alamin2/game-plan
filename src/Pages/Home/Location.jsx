@@ -1,60 +1,65 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { motion } from "framer-motion";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { FaMapMarkerAlt, FaPhone, FaClock, FaDirections } from "react-icons/fa";
 
 const Location = () => {
-  // Coordinates for your club (replace with actual coordinates)
   const clubLocation = [23.909155912872848, 90.262328282984];
   const zoomLevel = 15;
 
   return (
     <div className="mt-18 md:mt-40 py-30 bg-base-200">
       <div className="w-11/12 lg:container mx-auto">
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-2">
             Visit Our Club
           </h2>
           <p className="text-lg text-gray-600">
             Conveniently located in the heart of the city
           </p>
-        </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left Side - Contact Info */}
-          <div className="bg-base-100 shadow-lg rounded-lg p-8">
+          {/* Left Side */}
+          <motion.div
+            className="bg-base-100 shadow-lg rounded-lg p-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <div className="space-y-6">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <FaMapMarkerAlt className="text-primary" />
                 Address & Contact
               </h3>
-              {/* address */}
               <div>
                 <h4 className="font-bold">Address</h4>
-                <div className="space-y-1">
-                  <p className="text-gray-700">123 Sports Avenue</p>
-                  <p className="text-gray-700">Savar, Dhaka</p>
-                  <p className="text-gray-700">Bangladesh</p>
+                <div className="space-y-1 text-gray-700">
+                  <p>123 Sports Avenue</p>
+                  <p>Savar, Dhaka</p>
+                  <p>Bangladesh</p>
                 </div>
               </div>
-              {/* phone */}
               <div>
                 <h4 className="font-bold">Phone</h4>
-                <p className="text-gray-700 mt-1 flex items-center gap-2">
+                <p className="mt-1 flex items-center gap-2">
                   <FaPhone className="text-primary" /> +1 (555) 123-4567
                 </p>
               </div>
-              {/* operating hours */}
               <div>
                 <h4 className="font-bold flex items-center gap-2">
                   <FaClock className="text-secondary" />
                   Operating Hours
                 </h4>
-                <p className="text-gray-700 mt-1">
-                  Monday - Friday: 6:00 AM - 10:00 PM
-                </p>
-                <p className="text-gray-700">
-                  Saturday - Sunday: 7:00 AM - 9:00 PM
-                </p>
+                <p className="mt-1">Monday - Friday: 6:00 AM - 10:00 PM</p>
+                <p>Saturday - Sunday: 7:00 AM - 9:00 PM</p>
               </div>
             </div>
 
@@ -69,10 +74,16 @@ const Location = () => {
                 Get Directions
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side - Map */}
-          <div className="h-96 lg:h-full rounded-lg overflow-hidden shadow-lg z-0">
+          <motion.div
+            className="h-96 lg:h-full rounded-lg overflow-hidden shadow-lg z-0"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <MapContainer
               center={clubLocation}
               zoom={zoomLevel}
@@ -99,7 +110,7 @@ const Location = () => {
                 </Popup>
               </Marker>
             </MapContainer>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

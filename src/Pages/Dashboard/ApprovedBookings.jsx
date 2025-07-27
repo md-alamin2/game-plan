@@ -15,6 +15,8 @@ import Loading from "../../Components/Sheared/Loading";
 import { useState } from "react";
 import SearchBar from "../../Components/Sheared/SearchBar";
 import EmptyState from "../../Components/Sheared/EmptyState";
+import WrapContainer from "../../Components/AnimateCompnent/WrapContainer";
+import WrapTr from "../../Components/AnimateCompnent/WrapTr";
 
 const ApprovedBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -70,7 +72,8 @@ const ApprovedBookings = () => {
   };
 
   return (
-    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+    <WrapContainer>
+      <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
         <h2 className="text-3xl font-bold">Approved Bookings</h2>
         <SearchBar
@@ -115,7 +118,7 @@ const ApprovedBookings = () => {
             </thead>
             <tbody>
               {bookings?.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50 text-center">
+                <WrapTr key={booking._id}>
                   <td>{index + 1}</td>
                   <td className="py-2 px-4">{booking.courtName}</td>
                   <td className="py-2 px-4 ">{booking.courtType}</td>
@@ -153,13 +156,14 @@ const ApprovedBookings = () => {
                       </button>
                     </div>
                   </td>
-                </tr>
+                </WrapTr>
               ))}
             </tbody>
           </table>
         </div>
       )}
     </div>
+    </WrapContainer>
   );
 };
 

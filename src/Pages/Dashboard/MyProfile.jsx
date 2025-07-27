@@ -23,6 +23,8 @@ import useAdminState from "../../Hooks/useAdminState";
 import CountUp from "react-countup";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Loading from "../../Components/Sheared/Loading";
+import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 
 const MyProfile = () => {
   const { user, logoutUser, updateUser, setLoading } = useAuth();
@@ -31,7 +33,7 @@ const MyProfile = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(user?.photoURL || "");
-  const fileInputRef = useRef(null)
+  const fileInputRef = useRef(null);
   const axiosSecure = useAxiosSecure();
   const { courtState, membersState, usersState, isLoading } = useAdminState();
 
@@ -45,6 +47,16 @@ const MyProfile = () => {
       displayName: user?.displayName || "",
       email: user?.email || "",
     },
+  });
+
+  // Fetch ONLY the logged-in user's pending bookings
+  const { data: member = {}, isLoading: memberLoading } = useQuery({
+    queryKey: ["pendingBookings", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`users/role?email=${user?.email}`);
+      return data;
+    },
+    enabled: role === "member", // Only fetch when user exists
   });
 
   const handleImageChange = (e) => {
@@ -157,10 +169,15 @@ const MyProfile = () => {
     });
   };
 
-  isLoading && <Loading></Loading>
+  isLoading && <Loading></Loading>;
 
   return (
-    <div className="container mx-auto p-6">
+    <motion.div
+      className="container mx-auto p-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         {/* Profile Header */}
         <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">
@@ -193,7 +210,13 @@ const MyProfile = () => {
         {/* Profile Content */}
         <div className="p-6">
           {isEditing ? (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <motion.form
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-4"
+            >
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Avatar Section */}
                 <div className="flex flex-col items-center">
@@ -283,7 +306,7 @@ const MyProfile = () => {
                   </div>
                 </div>
               </div>
-            </form>
+            </motion.form>
           ) : (
             <div className="flex flex-col md:flex-row gap-8">
               {/* Profile Info */}
@@ -299,9 +322,19 @@ const MyProfile = () => {
                 ) : (
                   <p className="text-gray-500">
                     {role === "member" ? "Member" : "User"} since{" "}
-                    {new Date(
-                      user?.metadata?.creationTime
-                    ).toLocaleDateString()}
+                    {role === "member"
+                      ? new Date(member.member_since).toDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
+                      : new Date(
+                          user?.metadata?.creationTime
+                        ).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
                   </p>
                 )}
               </div>
@@ -329,13 +362,22 @@ const MyProfile = () => {
                           {role === "member" ? "Member" : "User"} Since
                         </p>
                         <p className="font-medium">
-                          {new Date(
-                            user?.metadata?.creationTime
-                          ).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
+                          {role === "member"
+                            ? new Date(member.member_since).toDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )
+                            : new Date(
+                                user?.metadata?.creationTime
+                              ).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              })}
                         </p>
                       </div>
                     </div>
@@ -352,7 +394,10 @@ const MyProfile = () => {
                       Pending Bookings
                     </button>
                   </Link>
-                  <button onClick={handleLogout} className="btn btn-error w-full md:w-fit">
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-error w-full md:w-fit"
+                  >
                     <FaSignOutAlt className="mr-2" />
                     Logout
                   </button>
@@ -373,7 +418,7 @@ const MyProfile = () => {
                 <div className="stat-title">Total Courts</div>
                 <div className="stat-value text-primary">
                   {roleLoading ? (
-                    "..."
+                    <Loading></Loading>
                   ) : (
                     <CountUp
                       end={courtState?.length}
@@ -392,7 +437,7 @@ const MyProfile = () => {
                 <div className="stat-title">Total Users</div>
                 <div className="stat-value text-secondary">
                   {roleLoading ? (
-                    "..."
+                    <Loading></Loading>
                   ) : (
                     <CountUp
                       end={usersState?.length}
@@ -426,7 +471,7 @@ const MyProfile = () => {
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -8,6 +8,8 @@ import Loading from "../../Components/Sheared/Loading";
 import SearchBar from "../../Components/Sheared/SearchBar";
 import { useState } from "react";
 import EmptyState from "../../Components/Sheared/EmptyState";
+import WrapContainer from "../../Components/AnimateCompnent/WrapContainer";
+import WrapTr from "../../Components/AnimateCompnent/WrapTr";
 
 const BookingsApproval = () => {
   const { role, roleLoading } = useUserRole();
@@ -25,9 +27,8 @@ const BookingsApproval = () => {
       const { data } = await axiosSecure.get(`bookings/pending/all?search=${searchTerm}`);
       return data;
     },
-    // enabled: role === "admin"
+    enabled: role === "admin"
   });
-  console.log(pendingBookings);
 
   // Approve/Reject mutations
   const { mutate: updateBookingStatus } = useMutation({
@@ -76,7 +77,8 @@ const BookingsApproval = () => {
   isLoading && <Loading></Loading>
 
   return (
-    <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+    <WrapContainer>
+      <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
         <h2 className="text-3xl text-center md:text-start font-bold">Pending Bookings Approval</h2>
 
@@ -113,7 +115,7 @@ const BookingsApproval = () => {
             </thead>
             <tbody>
               {pendingBookings.map((booking, index) => (
-                <tr key={booking._id} className="hover:bg-gray-50 text-center">
+                <WrapTr key={booking._id}>
                   <td>{index + 1}</td>
                   <td className="px-4 py-3">{booking.courtName}</td>
                   <td className="px-4 py-3">{booking.user}</td>
@@ -176,13 +178,14 @@ const BookingsApproval = () => {
                       <FaEye />
                     </button>
                   </td>
-                </tr>
+                </WrapTr>
               ))}
             </tbody>
           </table>
         </div>
       )}
     </div>
+    </WrapContainer>
   );
 };
 

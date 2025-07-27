@@ -3,6 +3,16 @@ import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Sheared/Loading";
+import { motion } from "framer-motion";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6 }
+  }),
+};
 
 const StatsSection = () => {
   const [stats, setStats] = useState([]);
@@ -23,15 +33,23 @@ const StatsSection = () => {
   }, []);
 
   if (loading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   return (
     <div className="py-4 bg-base-200">
       <div className="w-11/12 lg:container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8">
-          {stats.map((stat) => (
-            <div key={stat.id} className="card">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.id}
+              className="card"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              custom={index}
+            >
               <div className="card-body items-center text-center">
                 <div className="mb-4 p-4 rounded-full bg-base-300">
                   <img className="w-10" src={stat.icon} alt="" />
@@ -51,7 +69,7 @@ const StatsSection = () => {
                 <h3 className="text-xl font-semibold mt-2">{stat.title}</h3>
                 <p className="text-gray-500">{stat.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

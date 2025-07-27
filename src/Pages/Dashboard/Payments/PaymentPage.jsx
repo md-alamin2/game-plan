@@ -7,6 +7,7 @@ import PaymentForm from './PaymentForm';
 import { useQuery } from '@tanstack/react-query';
 import useUserRole from '../../../Hooks/useUserRole';
 import Loading from '../../../Components/Sheared/Loading';
+import { motion } from "framer-motion";
 
 // Load Stripe outside component to avoid recreating
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
@@ -39,13 +40,13 @@ const PaymentPage = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Complete Your Payment</h2>
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.4}} className="max-w-2xl mx-auto my-6">
+      <h2 className="text-3xl font-bold mb-6">Complete Your Payment</h2>
       
       <Elements stripe={stripePromise}>
         <PaymentForm booking={booking} />
       </Elements>
-    </div>
+    </motion.div>
   );
 };
 

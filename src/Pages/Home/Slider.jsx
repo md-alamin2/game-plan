@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import axios from "axios";
 import Loading from "../../Components/Sheared/Loading";
+import { motion } from "framer-motion";
 
 const Slider = () => {
   const [slides, setSlides] = useState([]);
@@ -30,7 +31,7 @@ const Slider = () => {
   }
 
   return (
-    <div className="relative h-[80vh]">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.4}}  className="relative h-[80vh]">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         spaceBetween={0}
@@ -76,7 +77,7 @@ const Slider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

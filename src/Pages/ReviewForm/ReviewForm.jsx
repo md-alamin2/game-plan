@@ -1,12 +1,17 @@
 import { useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import { FaPaperPlane } from "react-icons/fa";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+import Loading from "../../Components/Sheared/Loading";
+import { motion } from "framer-motion";
 
 const ReviewForm = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     courtName: "",
     rating: 0,
@@ -17,7 +22,6 @@ const ReviewForm = () => {
     },
   });
   const [hoverRating, setHoverRating] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -46,6 +50,24 @@ const ReviewForm = () => {
     }
   };
 
+  // Review post mutation
+  const { mutate: postReview, isPending } = useMutation({
+    mutationFn: async (review) => {
+      await axiosSecure.post("reviews", review);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["pendingBookings", user?.email]);
+      Swal.fire({
+        title: "Your Review submit successfully!",
+        text: "Thanks for your honest review",
+        icon: "success",
+      });
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || "Failed to cancel booking");
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -55,32 +77,28 @@ const ReviewForm = () => {
       setError("Please fill all fields and select a rating");
       return;
     }
-
-    setIsSubmitting(true);
-    console.log(formData);
-
-    // try {
-    //   // Replace with your API endpoint
-    //   await axios.post("https://assignment-10-server-mu-eight.vercel.app/reviews", formData);
-    //   Swal.fire({
-    //     title: "Your Review submit successfully!",
-    //     text: "Thanks for your honest review",
-    //     icon: "success",
-    //   });
-    // } catch (err) {
-    //   setError(err.response?.data?.message || "Submission failed");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    postReview(formData);
   };
 
+  isPending && <Loading></Loading>;
+
   return (
-    <div className="w-11/12 max-w-2xl mx-auto p-6 my-10 md:my-30 border border-gray-300 rounded-2xl">
+    <motion.div
+      className="w-11/12 max-w-2xl mx-auto p-6 my-10 md:my-30 border border-gray-300 rounded-2xl"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <title>Rate US</title>
-      <h1 className="text-3xl font-bold mb-2">Leave a Review</h1>
-      <p className="text-gray-600 mb-6">
-        Share your experience working with us
-      </p>
+      <motion.h2
+        className="text-3xl font-bold mb-2"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        Leave a Review
+      </motion.h2>
+      <p className="text-gray-600 mb-6">Share your experience with us</p>
 
       {error && (
         <div className="alert alert-error mb-4">
@@ -101,8 +119,13 @@ const ReviewForm = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-
+      <motion.form
+        onSubmit={handleSubmit}
+        className="space-y-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
         {/* Name */}
         <div className="form-control">
           <label className="label">
@@ -185,18 +208,21 @@ const ReviewForm = () => {
 
         {/* Submit Button */}
         <div className="form-control mt-6">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             type="submit"
             className={`btn btn-primary text-white ${
-              isSubmitting ? "loading" : ""
+              isPending ? "loading" : ""
             }`}
-            disabled={isSubmitting}
+            disabled={isPending}
           >
-            <FaPaperPlane />{isSubmitting ? "" : "Submit Review"}
-          </button>
+            <FaPaperPlane />
+            {isPending ? "" : "Submit Review"}
+          </motion.button>
         </div>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>
   );
 };
 
