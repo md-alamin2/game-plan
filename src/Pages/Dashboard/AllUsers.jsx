@@ -105,6 +105,7 @@ const AllUsers = () => {
 
   return (
     <WrapContainer>
+      <title>All Users</title>
       <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-3xl font-bold">Manage All Users</h2>

@@ -46,6 +46,7 @@ const PendingBookings = () => {
 
   return (
     <WrapContainer>
+      <title>Pending Bookings</title>
       <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <h2 className="text-3xl font-bold ">Your Pending Bookings</h2>

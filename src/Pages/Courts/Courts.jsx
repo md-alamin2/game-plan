@@ -36,6 +36,7 @@ const Courts = () => {
 
   return (
     <div className="w-11/12 lg:w-11/12 lg:container mx-auto">
+      <title>Courts</title>
       <div className="text-center py-12">
         <h2 className="text-5xl font-bold">Our Premium Courts</h2>
         <p className="text-lg mt-4 max-w-2xl mx-auto">

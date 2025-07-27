@@ -138,6 +138,7 @@ const Announcements = () => {
 
   return (
     <div className="max-w-7xl mx-auto my-8 px-4 sm:px-6 lg:px-8">
+      <title>Announcement</title>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

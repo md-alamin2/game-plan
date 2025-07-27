@@ -178,6 +178,7 @@ const MyProfile = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
+      <title>My Profile</title>
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         {/* Profile Header */}
         <div className="bg-gradient-to-r from-primary to-secondary p-6 text-white">

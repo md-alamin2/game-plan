@@ -63,6 +63,7 @@ const ManageCourts = () => {
 
   return (
     <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <title>Manage courts</title>
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-3xl font-bold">Manage Courts</h2>
 

@@ -20,6 +20,7 @@ const FAQ = () => {
 
   return (
     <WrapContainer>
+      <title>FAQS</title>
       <div className="w-11/12 max-w-4xl my-20 p-4 mx-auto bg-white rounded-2xl shadow-md">
         <h2 className="text-5xl font-bold text-center mb-6 text-gray-800">
           Frequently Asked Questions

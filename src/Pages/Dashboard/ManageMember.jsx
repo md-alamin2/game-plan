@@ -63,6 +63,7 @@ const ManageMembers = () => {
 
   return (
     <WrapContainer>
+      <title>Manage Members</title>
       <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
       <div className="flex flex-col md:flex-row justify-between gap-4 items-center mb-6">
         <h2 className="text-3xl font-bold flex items-center gap-2">

@@ -134,6 +134,7 @@ const ManageCoupons = () => {
   return (
     <WrapContainer>
       <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
+      <title>Manage coupons</title>
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Coupons</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">

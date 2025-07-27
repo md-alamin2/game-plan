@@ -36,6 +36,7 @@ const PaymentHistory = () => {
 
   return (
     <WrapContainer>
+      <title>Payment History</title>
       <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
           <h2 className="text-3xl font-bold">Payment History</h2>

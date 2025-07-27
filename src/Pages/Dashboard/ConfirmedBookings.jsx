@@ -27,6 +27,7 @@ const ConfirmedBookings = () => {
 
   return (
     <WrapContainer>
+      <title>Confirmed Bookings</title>
       <div className="w-11/12 lg:w-11/12 lg:container mx-auto my-6">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
           <h2 className="text-3xl font-bold">Confirmed Bookings</h2>
