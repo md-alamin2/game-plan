@@ -14,7 +14,6 @@ const Brands = () => {
             setLoading(false);
         })
     },[])
-    console.log(brands)
   return (
     <div className="w-11/12 lg:container mx-auto my-18 md:my-40">
       <Marquee speed={40} pauseOnHover={true}>

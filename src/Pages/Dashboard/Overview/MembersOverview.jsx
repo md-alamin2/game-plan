@@ -34,7 +34,6 @@ const MemberDashboard = () => {
       return res.data;
     }
   });
-  console.log(stats)
 
   // Activity chart data
   const activityData = {
@@ -54,7 +53,7 @@ const MemberDashboard = () => {
 
   return (
     <div className="p-6 space-y-8">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row gap-3 md:gap-0 justify-between items-center">
         <h1 className="text-3xl font-bold">My Dashboard</h1>
         <select 
           className="select select-bordered"

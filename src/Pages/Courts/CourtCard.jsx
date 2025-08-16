@@ -16,7 +16,6 @@ const CourtCard = ({
   const location = useLocation();
   const {user} = useAuth();
   const navigate = useNavigate();
-  console.log(user)
 
   return (
     <motion.div

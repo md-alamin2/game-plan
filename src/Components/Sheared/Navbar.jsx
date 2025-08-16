@@ -5,9 +5,11 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { MdOutlineLogout } from "react-icons/md";
+import useUserRole from "../../Hooks/useUserRole";
 
 const Navbar = () => {
   const { logoutUser, user } = useAuth();
+  const {role} = useUserRole();
   const active = "font-semibold bg-primary text-white";
   const links = (
     <>
@@ -136,7 +138,7 @@ const Navbar = () => {
                     <p>{user.displayName}</p>
                   </li>
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to={`${role==="user"?"/dashboard/my-profile":"/dashboard"}`}>Dashboard</Link>
                   </li>
                   <li>
                     <button

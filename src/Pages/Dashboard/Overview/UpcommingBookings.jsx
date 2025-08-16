@@ -2,7 +2,6 @@ import { FaClock, FaCalendarAlt, FaCheckCircle, FaBaseballBall } from 'react-ico
 import { motion } from 'framer-motion';
 
 const UpcomingBookings = ({ bookings }) => {
-    console.log(bookings)
   // Format booking data for display
   const formatBooking = (booking) => ({
     id: booking._id,
@@ -13,7 +12,6 @@ const UpcomingBookings = ({ bookings }) => {
   });
 
   const upcomingBookings = bookings.map(formatBooking);
-  console.log(upcomingBookings)
 
   if (upcomingBookings.length === 0) {
     return (
@@ -39,8 +37,7 @@ const UpcomingBookings = ({ bookings }) => {
           transition={{ delay: index * 0.1 }}
           className="flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors"
         >
-          {console.log(booking?.bookingDate)}
-          <div className="flex-shrink-0 p-3 bg-blue-100 text-primary rounded-lg mr-4">
+          <div className="flex-shrink-0 p-3 bg-blue-100 text-primary rounded-lg mr-4 hidden md:block">
             <FaBaseballBall className="text-xl" />
           </div>
           <div className="flex-grow">
