@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import BookingModal from "./BookingModal";
 import { motion } from "framer-motion";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import useAuth from "../../Hooks/useAuth";
 
 const CourtCard = ({
   court,
@@ -13,7 +14,9 @@ const CourtCard = ({
   const [isOpen, setIsOpen] = useState(false);
   const availableSlots = court.slots.filter((s) => s.available === true);
   const location = useLocation();
-  console.log(location);
+  const {user} = useAuth();
+  const navigate = useNavigate();
+  console.log(user)
 
   return (
     <motion.div
@@ -73,7 +76,7 @@ const CourtCard = ({
 
         <div className="card-actions">
           <button
-            onClick={() => setIsOpen(true)}
+            onClick={() => user?.email ? setIsOpen(true) : navigate("/login")}
             className="btn btn-primary w-full text-white"
           >
             Book Now
@@ -85,6 +88,8 @@ const CourtCard = ({
           />
         </div>
       </div>
+      
+      {/* for dashboard */}
       {location.pathname === "/dashboard/manage-courts" && (
         <div className="absolute top-2 right-2 flex gap-2">
           <button
