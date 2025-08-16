@@ -25,6 +25,7 @@ import ErrorPage from "../Components/Sheared/ErrorPage";
 import MemberRoute from "./MemberRoute";
 import FAQ from "../Pages/FAQ/FAQ";
 import ReviewForm from "../Pages/ReviewForm/ReviewForm";
+import Overview from "../Pages/Dashboard/Overview/Overview";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
     children: [
         {
             index: true,
+            element: <PrivateRoutes><Overview></Overview></PrivateRoutes>
+        },
+        {
+            path:"/dashboard/my-profile",
             element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
         },
         {

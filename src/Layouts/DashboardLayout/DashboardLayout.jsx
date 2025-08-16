@@ -17,6 +17,7 @@ import {
   FaBullhorn,
 } from "react-icons/fa";
 import useUserRole from "../../Hooks/useUserRole";
+import { MdDashboardCustomize } from "react-icons/md";
 
 const DashboardLayout = () => {
   const navigation = useNavigation();
@@ -72,13 +73,24 @@ const DashboardLayout = () => {
             className="menu gap-2 bg-base-200 text-base-content min-h-full w-80 p-4"
           >
             <Logo />
-            <li>
+            {(role === "admin" || role === "member")&&<li>
               <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
                   isActive && location.pathname === "/dashboard"
                     ? active
                     : "font-medium"
+                }
+              >
+                <MdDashboardCustomize className="mr-2" />
+                Dashboard
+              </NavLink>
+            </li>}
+            <li>
+              <NavLink
+                to="/dashboard/my-profile"
+                className={({ isActive }) =>
+                  isActive ? active : "font-medium"
                 }
               >
                 <FaUser className="mr-2" />
