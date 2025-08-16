@@ -34,7 +34,7 @@ const About = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
-          <div className="grid grid-cols-1 gap-4 md:mb-16">
+          <div className="grid grid-cols-1 gap-4">
             {/* History */}
             <motion.div 
               className="p-8 rounded-lg shadow-md border border-gray-300"
@@ -102,7 +102,7 @@ const About = () => {
             variants={fadeInUp}
             custom={4}
           >
-            <img className="rounded-lg w-full h-[calc(100%-65px)]" src={img} alt="" />
+            <img className="rounded-lg w-full h-full" src={img} alt="" />
             <div className="bg-primary rounded-2xl px-2 py-3 w-40 absolute left-8 top-96 md:top-70 md:-left-4 lg:-left-10">
               <h3 className="text-3xl font-bold text-white">10+</h3>
               <p className="text-base font-medium text-white">

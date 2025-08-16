@@ -20,7 +20,7 @@ const ExclusiveOffers = () => {
 
   return (
     <motion.div
-      className="my-18 md:my-40 bg-base-100"
+      className="mt-18 md:mt-40 bg-base-100"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}

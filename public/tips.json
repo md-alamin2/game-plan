@@ -1,0 +1,34 @@
+[
+    {
+      "id": 1,
+      "title": "Proper Hydration for Athletes",
+      "description": "Drink at least 500ml of water 2 hours before training and sip small amounts during exercise.",
+      "category": "nutrition",
+      "author": "Dr. Sarah Johnson",
+      "date": "May 15, 2024"
+    },
+    {
+      "id": 2,
+      "title": "Dynamic Warm-Up Routine",
+      "description": "Spend 10-15 minutes on dynamic stretches like leg swings and lunges to prevent injuries.",
+      "category": "training",
+      "author": "Coach Mark Davis",
+      "date": "June 2, 2024"
+    },
+    {
+      "id": 3,
+      "title": "The Power of Visualization",
+      "description": "Visualize successful plays before a game to boost confidence and focus.",
+      "category": "mental",
+      "author": "Sports Psychologist Lisa Wong",
+      "date": "April 28, 2024"
+    },
+    {
+      "id": 4,
+      "title": "Post-Workout Recovery Tips",
+      "description": "Use foam rolling and static stretching after training to enhance recovery.",
+      "category": "recovery",
+      "author": "Physiotherapist Alex Carter",
+      "date": "May 30, 2024"
+    }
+  ]

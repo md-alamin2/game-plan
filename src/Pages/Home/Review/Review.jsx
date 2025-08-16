@@ -101,7 +101,7 @@ const Review = () => {
                   <div className="flex items-center gap-2 mt-4">
                     <img
                       src={review.user.img ? review.user.img : img}
-                      className="w-13 rounded-full"
+                      className="h-14 w-14 rounded-full ring-2 ring-primary cursor-pointer"
                     />
                     <div>
                       <h4 className="text-lg font-semibold">
