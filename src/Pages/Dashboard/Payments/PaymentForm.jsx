@@ -123,7 +123,7 @@ const PaymentForm = ({ booking }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 w-full">
       {/* Coupon Section */}
       <div className="bg-base-200 p-4 rounded-lg">
         <div className="flex gap-2">
@@ -150,8 +150,8 @@ const PaymentForm = ({ booking }) => {
       </div>
 
       {/* Booking Details */}
-      <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="form-control flex flex-col">
+      <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 md:gap-6">
+        <div className="form-control flex flex-col ">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
@@ -159,7 +159,7 @@ const PaymentForm = ({ booking }) => {
             type="email"
             value={booking.user}
             readOnly
-            className="input input-bordered bg-base-200"
+            className="input input-bordered bg-base-200 w-full"
           />
         </div>
 
@@ -171,7 +171,7 @@ const PaymentForm = ({ booking }) => {
             type="text"
             value={booking.courtName}
             readOnly
-            className="input input-bordered bg-base-200"
+            className="input input-bordered bg-base-200 w-full"
           />
         </div>
 
@@ -183,7 +183,7 @@ const PaymentForm = ({ booking }) => {
             type="text"
             value={booking.courtType}
             readOnly
-            className="input input-bordered bg-base-200"
+            className="input input-bordered bg-base-200 w-full"
           />
         </div>
 
@@ -195,7 +195,7 @@ const PaymentForm = ({ booking }) => {
             type="text"
             value={new Date(booking.bookingDate).toLocaleDateString()}
             readOnly
-            className="input input-bordered bg-base-200"
+            className="input input-bordered bg-base-200 w-full"
           />
         </div>
 
@@ -207,7 +207,7 @@ const PaymentForm = ({ booking }) => {
             type="text"
             value={`$${finalPrice}`}
             readOnly
-            className="input input-bordered bg-base-200 font-bold"
+            className="input input-bordered bg-base-200 w-full font-bold"
           />
           {discount > 0 && (
             <p className="text-sm text-gray-500 mt-1">

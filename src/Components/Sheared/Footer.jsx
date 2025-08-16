@@ -9,29 +9,49 @@ import {
 import { MdOutlineEmail } from "react-icons/md";
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router";
+import useAuth from "../../Hooks/useAuth";
 
 const Footer = () => {
-    const active = "font-semibold text-white";
+  const {user} = useAuth();
+    const active = "font-semibold text-primary";
     const links = (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? active : "font-medium")}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/courts"
-          className={({ isActive }) => (isActive ? active : "font-medium")}
-        >
-          Courts
-        </NavLink>
-      </li>
-    </>
-  );
+        <>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/courts"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              Courts
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/faqs"
+              className={({ isActive }) => (isActive ? active : "font-medium")}
+            >
+              FAQS
+            </NavLink>
+          </li>
+          {user && (
+            <li>
+              <NavLink
+                to="/rating"
+                className={({ isActive }) => (isActive ? active : "font-medium")}
+              >
+                Rate US
+              </NavLink>
+            </li>
+          )}
+        </>
+      );
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="container mx-auto">

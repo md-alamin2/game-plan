@@ -78,6 +78,7 @@ const ReviewForm = () => {
       return;
     }
     postReview(formData);
+    setFormData("")
   };
 
   isPending && <Loading></Loading>;

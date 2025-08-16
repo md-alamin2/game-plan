@@ -17,7 +17,6 @@ import {
   FaBullhorn,
 } from "react-icons/fa";
 import useUserRole from "../../Hooks/useUserRole";
-import { motion } from "framer-motion";
 
 const DashboardLayout = () => {
   const navigation = useNavigation();
@@ -57,7 +56,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* Page Content with Animation */}
-        <div>{navigation.state === "loading" ? <Loading /> : <Outlet />}</div>
+        <div>{(navigation.state === "loading" || roleLoading) ? <Loading /> : <Outlet />}</div>
       </div>
 
       {/* Sidebar */}
@@ -69,11 +68,8 @@ const DashboardLayout = () => {
         ></label>
 
         {!roleLoading && (
-          <motion.ul
+          <ul
             className="menu gap-2 bg-base-200 text-base-content min-h-full w-80 p-4"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
           >
             <Logo />
             <li>
@@ -221,7 +217,7 @@ const DashboardLayout = () => {
                 Announcements
               </NavLink>
             </li>
-          </motion.ul>
+          </ul>
         )}
       </div>
     </div>

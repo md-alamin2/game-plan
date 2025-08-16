@@ -6,6 +6,7 @@ import Location from "./Location";
 import ExclusiveOffers from "./ExclusiveOffers";
 import ReviewSection from "./Review/ReviewSection";
 import { motion } from "framer-motion";
+import Brands from "./Brands";
 
 const Home = () => {
   return <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.4}}>
@@ -16,6 +17,7 @@ const Home = () => {
     <Location></Location>
     <ReviewSection></ReviewSection>
     <ExclusiveOffers></ExclusiveOffers>
+    <Brands></Brands>
   </motion.div>;
 };
 

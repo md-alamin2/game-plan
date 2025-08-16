@@ -40,7 +40,7 @@ const PaymentPage = () => {
   }
 
   return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.4}} className="max-w-2xl mx-auto my-6">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.4}} className="max-w-2xl w-11/12 mx-auto my-6">
       <title>Payment</title>
       <h2 className="text-3xl font-bold mb-6">Complete Your Payment</h2>
       
