@@ -143,16 +143,16 @@ const AllUsers = () => {
       ) : (
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
-            <thead className="bg-gray-50">
+            <thead>
               <tr className="text-center">
-                <th className="px-6 py-3 text-left">User</th>
-                <th className="px-6 py-3">Email</th>
-                <th className="px-6 py-3">Role</th>
-                <th className="px-6 py-3">Joined</th>
-                <th className="px-6 py-3">Actions</th>
+                <th className="text-left">User</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined</th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody>
               {users.map((user) => (
                 <WrapTr key={user._id}>
                   <td className="px-6 py-4 whitespace-nowrap text-left">
@@ -165,10 +165,10 @@ const AllUsers = () => {
                         />
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium">
                           {user.name}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm">
                           {user.role === "member"
                             ? "Member"
                             : user.role === "admin"
@@ -178,7 +178,7 @@ const AllUsers = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     {user.email}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -192,7 +192,7 @@ const AllUsers = () => {
                       {user.role}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     {new Date(user.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex justify-center gap-2">

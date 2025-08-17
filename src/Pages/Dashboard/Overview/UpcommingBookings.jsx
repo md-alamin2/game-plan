@@ -35,14 +35,14 @@ const UpcomingBookings = ({ bookings }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className="flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+          className="flex items-start p-4 border rounded-lg transition-colors"
         >
           <div className="flex-shrink-0 p-3 bg-blue-100 text-primary rounded-lg mr-4 hidden md:block">
             <FaBaseballBall className="text-xl" />
           </div>
           <div className="flex-grow">
             <div className="flex justify-between items-start">
-              <h4 className="font-semibold text-gray-800">{booking.court}</h4>
+              <h4 className="font-semibold">{booking.court}</h4>
               <span className={`text-xs px-2 py-1 rounded-full ${
                 booking.status === 'confirmed' 
                   ? 'bg-green-100 text-green-800' 

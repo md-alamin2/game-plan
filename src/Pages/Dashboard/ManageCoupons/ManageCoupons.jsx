@@ -170,7 +170,7 @@ const ManageCoupons = () => {
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr className="bg-gray-100 text-center">
+              <tr className="bg-base-200 text-center">
                 <th>#</th>
                 <th>Code</th>
                 <th>Discount (%)</th>
@@ -244,10 +244,10 @@ const ManageCoupons = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-lg font-medium leading-6"
                   >
                     {editingCoupon ? "Edit Coupon" : "Add New Coupon"}
                   </Dialog.Title>

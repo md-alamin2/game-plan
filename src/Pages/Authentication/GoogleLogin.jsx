@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import useAxios from "../../Hooks/useAxios";
 
 const GoogleLogin = () => {
-  const { loginWithGoogle, setUser, loading } = useAuth();
+  const { loginWithGoogle, setUser, loading, setLoading } = useAuth();
   const axiosInstance = useAxios();
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,6 +16,7 @@ const GoogleLogin = () => {
     loginWithGoogle()
       .then(async (result) => {
         const user = result.user;
+        setUser(user);
         // set user on db
         const userInfo = {
           email: user.email,
@@ -35,8 +36,9 @@ const GoogleLogin = () => {
             icon: "success",
             timer: 2000,
           });
-          setUser(user);
+          setLoading(false);
           navigate(`${location.state ? location.state : "/"}`);
+          window.location.reload();
         }
       })
       .catch((error) => {

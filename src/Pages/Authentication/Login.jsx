@@ -41,7 +41,9 @@ const Login = () => {
           });
           setUser(user);
           setLoading(false)
-          navigate(`${location.state ? location.state : "/"}`);
+          navigate(`${location.state ? location.state : "/"}`)
+          window.location.reload();
+          
         }
       })
       .catch((error) => {

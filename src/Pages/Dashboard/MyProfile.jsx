@@ -317,7 +317,7 @@ const MyProfile = () => {
                     <img src={user?.photoURL} alt="Profile" />
                   </div>
                 </div>
-                <h2 className="text-xl font-bold">{user?.displayName}</h2>
+                <h2 className="text-xl font-bold text-black">{user?.displayName}</h2>
                 {role === "admin" ? (
                   ""
                 ) : (
@@ -346,13 +346,13 @@ const MyProfile = () => {
                   <FaEnvelope className="text-gray-400 text-xl" />
                   <div>
                     <p className="text-sm text-gray-500">Email</p>
-                    <p className="font-medium">{user?.email}</p>
+                    <p className="font-medium text-black">{user?.email}</p>
                   </div>
                 </div>
 
                 <div>
                   {role === "admin" ? (
-                    <p className="font-bold flex items-center gap-4">
+                    <p className="font-bold flex items-center gap-4 text-black">
                       <FaUser></FaUser> Admin
                     </p>
                   ) : (
@@ -362,7 +362,7 @@ const MyProfile = () => {
                         <p className="text-sm text-gray-500">
                           {role === "member" ? "Member" : "User"} Since
                         </p>
-                        <p className="font-medium">
+                        <p className="font-medium text-black">
                           {role === "member"
                             ? new Date(member.member_since).toDateString(
                                 "en-US",
@@ -410,7 +410,7 @@ const MyProfile = () => {
         {role === "admin" && !isEditing && (
           <>
             <div className="divider"></div>
-            <h3 className="font-bold text-lg px-6">Admin Dashboard</h3>
+            <h3 className="font-bold text-lg px-6 text-black">Admin Dashboard</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 pt-2">
               <div className="stat bg-base-100 rounded-lg shadow p-4">
                 <div className="stat-figure text-primary">

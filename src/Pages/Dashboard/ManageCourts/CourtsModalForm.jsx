@@ -124,7 +124,7 @@ const CourtModalForm = ({ court, onClose, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-base-100">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Court Name */}
         <div className="form-control">

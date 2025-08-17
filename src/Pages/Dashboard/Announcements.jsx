@@ -147,7 +147,7 @@ const Announcements = () => {
       >
         <div className="flex items-center">
           <FaBullhorn className="text-3xl text-blue-400 mr-3" />
-          <h2 className="text-3xl font-bold text-gray-800">Announcements</h2>
+          <h2 className="text-3xl font-bold">Announcements</h2>
         </div>
 
         
@@ -215,7 +215,7 @@ const Announcements = () => {
               <input
                 id="title"
                 {...registerNew("title", { required: "Title is required" })}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                className={`w-full p-3 border text-black rounded-lg focus:outline-none focus:ring-2 ${
                   newErrors.title
                     ? "border-red-500 focus:ring-red-500"
                     : "border-gray-300 focus:ring-indigo-500"
@@ -241,7 +241,7 @@ const Announcements = () => {
                   required: "Description is required",
                 })}
                 rows={4}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                className={`w-full p-3 text-black border rounded-lg focus:outline-none focus:ring-2 ${
                   newErrors.description
                     ? "border-red-500 focus:ring-red-500"
                     : "border-gray-300 focus:ring-indigo-500"
@@ -276,7 +276,7 @@ const Announcements = () => {
           className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-200"
         >
           <FaSearch className="mx-auto text-4xl text-gray-400 mb-4" />
-          <h3 className="text-xl font-medium text-gray-600">
+          <h3 className="text-xl font-medium">
             {searchTerm ? "No matching announcements" : "No announcements yet"}
           </h3>
           <p className="text-gray-500 mt-2">
@@ -314,7 +314,7 @@ const Announcements = () => {
                           {...registerEdit("title", {
                             required: "Title is required",
                           })}
-                          className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                          className={`w-full p-3 text-black border rounded-lg focus:outline-none focus:ring-2 ${
                             editErrors.title
                               ? "border-red-500 focus:ring-red-500"
                               : "border-gray-300 focus:ring-indigo-500"
@@ -335,7 +335,7 @@ const Announcements = () => {
                             required: "Description is required",
                           })}
                           rows={4}
-                          className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
+                          className={`w-full p-3 text-black border rounded-lg focus:outline-none focus:ring-2 ${
                             editErrors.description
                               ? "border-red-500 focus:ring-red-500"
                               : "border-gray-300 focus:ring-indigo-500"

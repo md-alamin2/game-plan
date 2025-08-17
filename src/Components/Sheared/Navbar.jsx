@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../Hooks/useAuth";
@@ -49,6 +49,24 @@ const Navbar = () => {
       )}
     </>
   );
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "light" ? "light" : "dark"
+  );
+
+  // Load theme from localStorage on component mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme);
+    document.querySelector("html").setAttribute("data-theme", savedTheme);
+  }, [theme]);
+
+  // Toggle theme function
+  const handleThemeChange = (event) => {
+    const newTheme = event.target.checked ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   // logout
   const handleLogout = () => {
@@ -121,6 +139,58 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
         </div>
         <div className="navbar-end">
+          {/* theme controller */}
+        <div id="theme-toggle">
+          <label className="toggle text-base-content mr-5">
+            <input
+              type="checkbox"
+              value="dark"
+              className=" theme-controller"
+              checked={theme === "dark"}
+              onChange={handleThemeChange}
+            />
+
+            <svg
+              aria-label="sun"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </g>
+            </svg>
+
+            <svg
+              aria-label="moon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </g>
+            </svg>
+          </label>
+        </div>
           {user ? (
             <div className="flex items-center gap-2">
               <div className="dropdown dropdown-hover dropdown-end lg:dropdown-start">

@@ -71,7 +71,7 @@ const MemberDashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
@@ -93,7 +93,7 @@ const MemberDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
@@ -116,7 +116,7 @@ const MemberDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
@@ -137,7 +137,7 @@ const MemberDashboard = () => {
 
       {/* Charts and Upcoming Bookings */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="card bg-white shadow-md p-6">
+        <div className="card bg-base-100 shadow-md p-6">
           <h3 className="text-xl font-bold mb-4">My Activity</h3>
           <Bar 
             data={activityData}
@@ -161,12 +161,12 @@ const MemberDashboard = () => {
         </div>
 
         <div className="space-y-6">
-          <div className="card bg-white shadow-md p-6">
+          <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-xl font-bold mb-4">Upcoming Bookings</h3>
             <UpcomingBookings bookings={stats?.recentBookings || []} />
           </div>
 
-          <div className="card bg-white shadow-md p-6">
+          <div className="card bg-base-100 shadow-md p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold">Membership Status</h3>
               <span className="badge badge-success">Active</span>

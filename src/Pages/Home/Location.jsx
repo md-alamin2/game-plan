@@ -41,7 +41,7 @@ const Location = () => {
               </h3>
               <div>
                 <h4 className="font-bold">Address</h4>
-                <div className="space-y-1 text-gray-700">
+                <div className="space-y-1">
                   <p>123 Sports Avenue</p>
                   <p>Savar, Dhaka</p>
                   <p>Bangladesh</p>

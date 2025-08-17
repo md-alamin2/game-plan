@@ -94,7 +94,7 @@ const ManageConfirmedBookings = () => {
         <div className="overflow-x-auto rounded-box border border-base-content/5">
           <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
             <thead>
-              <tr className="bg-gray-100 text-center">
+              <tr className="bg-base-200 text-center">
                 <th>#</th>
                 <th>Court</th>
                 <th>Type</th>

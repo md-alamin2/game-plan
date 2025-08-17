@@ -7,6 +7,12 @@
   --color-primary: #4bcd87;
   --color-secondary: #97a7e2;
 }
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  --color-primary: #4bcd87;
+  --color-secondary: #97a7e2;
+}
 
 *{
   font-family: "Inter", sans-serif;

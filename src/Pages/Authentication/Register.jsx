@@ -71,6 +71,7 @@ const Register = () => {
                   timer: 2000,
                 });
                 navigate(`${location.state ? location.state : "/"}`);
+                window.location.reload();
               })
               .catch((error) => {
                 const errorMassage = error.code;
@@ -184,7 +185,7 @@ const Register = () => {
                 {...register("photo", { required: true })}
                 accept="image/png, image/jpeg, image/gif"
                 onChange={handleFileChange}
-                // className="hidden"
+                className="mx-auto"
               />
             </label>
             {errors.photo?.type === "required" && (

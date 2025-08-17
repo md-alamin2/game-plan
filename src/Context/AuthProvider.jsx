@@ -18,6 +18,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log(user?.accessToken)
 
   // register user
   const createUser = (email, password) => {
@@ -55,7 +56,12 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
+      if (currentUser) {
+        // Force token refresh on auth state change
+        const token = await currentUser.getIdToken(true);
+        currentUser.accessToken = token; // Store the fresh token
+      }
       setUser(currentUser);
       setLoading(false);
     });

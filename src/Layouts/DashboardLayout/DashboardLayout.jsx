@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../Components/Logo/Logo";
 import { NavLink, Outlet, useLocation, useNavigation } from "react-router";
 import Loading from "../../Components/Sheared/Loading";
@@ -24,6 +24,17 @@ const DashboardLayout = () => {
   const { role, roleLoading } = useUserRole();
   const active = "font-semibold bg-primary text-white";
   const location = useLocation();
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "light" ? "light" : "dark"
+  );
+
+  // Load theme from localStorage on component mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme);
+    document.querySelector("html").setAttribute("data-theme", savedTheme);
+  }, [theme]);
 
   return (
     <div className="drawer lg:drawer-open">

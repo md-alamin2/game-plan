@@ -87,25 +87,25 @@ const ManageMembers = () => {
           iconType={searchTerm? "search" :""}
         />
       ) : (
-        <div className="overflow-x-auto bg-white rounded-lg shadow">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50 text-center">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        <div className="overflow-x-auto rounded-box border border-base-content/5">
+          <table className="table table-zebra table-sm lg:table-md w-full rounded-2xl">
+            <thead>
+              <tr className="bg-base-200 text-center">
+                <th>
                   Name
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th>
                   Email
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th>
                   Member Since
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th>
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody>
               {members.map((member) => (
                 <WrapTr key={member._id}>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -118,16 +118,16 @@ const ManageMembers = () => {
                         />
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium">
                           {member.name}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     {member.email}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
                     {new Date(member.member_since).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex justify-center">

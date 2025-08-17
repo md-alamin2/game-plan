@@ -26,7 +26,7 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             About Elite Sports Club
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto">
             For over a decade, we've been the premier destination for sports
             enthusiasts, offering world-class facilities and fostering a
             community of excellence.

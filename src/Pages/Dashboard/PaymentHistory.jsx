@@ -89,7 +89,7 @@ const PaymentHistory = () => {
           <div className="overflow-x-auto rounded-box border border-base-content/5">
             <table className="table table-zebra table-sm md:table-md w-full rounded-2xl">
               <thead>
-                <tr className="bg-gray-100 text-center">
+                <tr className="bg-base-100 text-center">
                   <th>#</th>
                   <th>Court</th>
                   <th>Paid</th>
@@ -126,7 +126,7 @@ const PaymentHistory = () => {
               {payments.map((payment, index) => (
                 <div
                   key={payment._id}
-                  className="border rounded-lg shadow-md p-4 bg-white"
+                  className="border rounded-lg shadow-md p-4 bg-base-100"
                 >
                   <h3 className="text-lg font-semibold mb-2">
                     #{index + 1} - {payment.courtName}

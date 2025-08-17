@@ -102,7 +102,7 @@ const Overview = () => {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.3 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
@@ -114,7 +114,7 @@ const Overview = () => {
                 <p className="text-2xl font-bold">{stats?.totalMembers || 0}</p>
               </div>
             </div>
-            <div className="mt-2 text-sm text-green-600 flex items-center">
+            <div className="mt-2 text-sm text-primary flex items-center">
               <FaChartLine className="mr-1" />
               <span>+{stats?.memberGrowth || 0}% from last period</span>
             </div>
@@ -126,7 +126,7 @@ const Overview = () => {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.3, delay: 0.1 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
@@ -138,7 +138,7 @@ const Overview = () => {
                 <p className="text-2xl font-bold">{stats?.totalBookings || 0}</p>
               </div>
             </div>
-            <div className="mt-2 text-sm text-green-600 flex items-center">
+            <div className="mt-2 text-sm text-primary flex items-center">
               <FaChartLine className="mr-1" />
               <span>+{stats?.bookingGrowth || 0}% from last period</span>
             </div>
@@ -150,11 +150,11 @@ const Overview = () => {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.3, delay: 0.2 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-green-100 text-green-600">
+              <div className="p-3 rounded-full bg-green-100 text-primary">
                 <FaMoneyBillWave className="text-2xl" />
               </div>
               <div className="ml-4">
@@ -162,7 +162,7 @@ const Overview = () => {
                 <p className="text-2xl font-bold">${stats?.totalRevenue?.toLocaleString() || 0}</p>
               </div>
             </div>
-            <div className="mt-2 text-sm text-green-600 flex items-center">
+            <div className="mt-2 text-sm text-primary flex items-center">
               <FaChartLine className="mr-1" />
               <span>+{stats?.revenueGrowth || 0}% from last period</span>
             </div>
@@ -174,7 +174,7 @@ const Overview = () => {
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="card bg-white shadow-md"
+          className="card bg-base-100 shadow-md"
         >
           <div className="card-body">
             <div className="flex items-center">
@@ -202,7 +202,7 @@ const Overview = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="card bg-white shadow-md p-6"
+          className="card bg-base-100 shadow-md p-6"
         >
           <h3 className="text-xl font-bold mb-4">Booking Trends</h3>
           <Bar 
@@ -227,7 +227,7 @@ const Overview = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="card bg-white shadow-md p-6"
+          className="card bg-base-100 shadow-md p-6"
         >
           <h3 className="text-xl font-bold mb-4">Court Popularity</h3>
           <div className="h-64 flex items-center justify-center">

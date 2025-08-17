@@ -8,7 +8,7 @@ const WrapTr = ({children}) => {
     visible: { opacity: 1, y: 0 },
   };
     return (
-        <motion.tr variants={itemVariants} transition={{duration:0.4}}  className="hover:bg-gray-50 text-center">
+        <motion.tr variants={itemVariants} transition={{duration:0.4}}  className="text-center">
             {children}
         </motion.tr>
     );
