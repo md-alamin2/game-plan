@@ -71,7 +71,7 @@ const Register = () => {
                   timer: 2000,
                 });
                 navigate(`${location.state ? location.state : "/"}`);
-                window.location.reload();
+                // window.location.reload();
               })
               .catch((error) => {
                 const errorMassage = error.code;
@@ -144,9 +144,9 @@ const Register = () => {
   return (
     <div className="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
       <title>Register</title>
-      <div className="max-w-md w-full space-y-8 bg-white p-8 border border-gray-300 rounded-lg shadow-md">
+      <div className="max-w-md w-full space-y-8 bg-base-100 p-8 border border-gray-300 rounded-lg shadow-md">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold">
             Create a new account
           </h2>
           <p className="mt-2 text-sm text-gray-600">Join our community today</p>
@@ -157,7 +157,7 @@ const Register = () => {
             {/* image */}
             <label
               htmlFor="fileInput"
-              className="w-full h-32 border border-dashed border-gray-300 bg-gray-50 rounded-lg flex flex-col items-center justify-center text-center cursor-pointer hover:border-gray-500 transition py-5"
+              className="w-full h-32 border border-dashed border-gray-300 bg-base-200 rounded-lg flex flex-col items-center justify-center text-center cursor-pointer hover:border-gray-500 transition py-5"
             >
               {previewURL ? (
                 <img
@@ -281,7 +281,7 @@ const Register = () => {
               })}
               className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded cursor-pointer"
             />
-            <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
+            <label htmlFor="terms" className="ml-2 block text-sm">
               I agree to the{" "}
               <Link to="/terms" className="text-primary">
                 Terms and Conditions

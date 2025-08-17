@@ -16,7 +16,6 @@ const GoogleLogin = () => {
     loginWithGoogle()
       .then(async (result) => {
         const user = result.user;
-        setUser(user);
         // set user on db
         const userInfo = {
           email: user.email,
@@ -30,6 +29,7 @@ const GoogleLogin = () => {
         const userRes = await axiosInstance.post("users", userInfo);
 
         if (userRes.data.modifiedCount) {
+          setUser(user);
           Swal.fire({
             title: "Login!",
             text: "User login successfully!",
@@ -38,7 +38,6 @@ const GoogleLogin = () => {
           });
           setLoading(false);
           navigate(`${location.state ? location.state : "/"}`);
-          window.location.reload();
         }
       })
       .catch((error) => {

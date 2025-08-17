@@ -33,16 +33,16 @@ const Login = () => {
         const userRes = await axiosInstance.post("users", userInfo);
 
         if (userRes.data.modifiedCount) {
+          setUser(user);
           Swal.fire({
             title: "Login!",
             text: "User login successfully!",
             icon: "success",
             timer: 2000,
           });
-          setUser(user);
           setLoading(false)
           navigate(`${location.state ? location.state : "/"}`)
-          window.location.reload();
+          // window.location.reload();
           
         }
       })
@@ -80,9 +80,9 @@ const Login = () => {
   return (
     <div className="flex justify-center  py-12 px-4 sm:px-6 lg:px-8">
       <title>Login</title>
-      <div className="max-w-md w-full space-y-8 bg-white p-8 border border-gray-300 rounded-lg shadow-md">
+      <div className="max-w-md w-full space-y-8 bg-base-100 p-8 border border-gray-300 rounded-lg shadow-md">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold">
             Sign in to your account
           </h2>
         </div>
@@ -151,7 +151,7 @@ const Login = () => {
               />
               <label
                 htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
+                className="ml-2 block text-sm"
               >
                 Remember me
               </label>
